@@ -1,0 +1,28 @@
+{"load_logs_data" :  
+	[
+		{
+			"date" : "01-May-2018",
+			"logs" : [{"success":30},{"fail":40}]
+		},
+
+		{
+			"date" : "02-May-2018",
+			"logs" : [{"success":40},{"fail":20}]
+		},
+
+		{
+			"date" : "03-May-2018",
+			"logs" : [{"success":60},{"fail":20}]
+		},
+
+		{
+			"date" : "04-May-2018",
+			"logs" : [{"success":80},{"fail":15}]
+		},
+
+		{
+			"date" : "05-May-2018",
+			"logs" : [{"success":50},{"fail":0}]
+		}
+	]
+}
