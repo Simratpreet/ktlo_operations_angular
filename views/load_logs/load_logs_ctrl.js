@@ -1,115 +1,157 @@
-app.controller('load_logs_ctrl',function($scope){
+app.controller('load_logs_ctrl', function($scope, $http){
+    $scope.date_range="23 Mar 18";
+    $scope.start_date = -1;
+    $scope.end_date = -1;
 
-var onload=function(){
-    console.log("Inside onload function...");
-    c3chart();
-    console.log("Finished generating chart...");
-}
+    var get_data = {};
+    get_data.start_date = $scope.start_date;
+    get_data.end_date = $scope.end_date;
+
+    //Calculate yesterday's date
+    var dateToday = new Date();
+    //dateYesterday.setDate(dateToday.getDate() - 1);
+
+    $('input[name="daterange"]').daterangepicker({
+        opens : 'left',
+        minDate : new Date('2018-03-23'),
+        maxDate : dateToday
+
+        //maxDate : 
+    }, function(start, end, label) {
+        console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
+        $scope.start_date = start.format('YYYY-MM-DD');
+        $scope.end_date = end.format('YYYY-MM-DD');
+        get_data.start_date = $scope.start_date;
+        get_data.end_date = $scope.end_date;
+        onload();
+    });
+
+
+
+    var onload = function(){
+        console.log("Inside onload function...");
+        console.log("get_data : " + JSON.stringify(get_data));
+        $http({
+                method : 'GET',
+                url : 'http://10.204.43.206:5010/loadtracker',
+                params : get_data
+        }).then(function successCallback(responsejson) {
+                $scope.data_json = responsejson.data.load_logs_data;
+                $scope.sd = responsejson.data.sd;
+                console.log("responsejson.data : " + JSON.stringify(responsejson.data));
+                c3chart();
+            }, function errorCallback(responseValue) {
+                console.log("error");
+        }); 
+        console.log("Finished generating chart...");
+    }
 
 var c3chart=function(){
-    var sampleJson=[
-        {
-            "date" : 2018-05-01,
-            "logs" : [{"success":30},{"fail":40}]
-        },
+    
+    sampleJson = $scope.data_json;
+    //console.log("sampleJson : " + sampleJson);
+    //console.log(typeof(sampleJson));
+    var arrayLength = sampleJson.length;
+    console.log("arrayLength : "+ arrayLength);
 
-        {
-            "date" : 2018-05-02,
-            "logs" : [{"success":40},{"fail":20}]
-        },
-
-        {
-            "date" : 2018-05-03,
-            "logs" : [{"success":60},{"fail":20}]
-        },
-
-        {
-            "date" : 2018-05-04,
-            "logs" : [{"success":80},{"fail":15}]
-        },
-
-        {
-            "date" : 2018-05-06,
-            "logs" : [{"success":50},{"fail":0}]
-        }
-    ];
-
-    var arrayLength=sampleJson.length;
-    console.log("arrayLength : "+arrayLength);
-
-    var dates=new Array();
-    dates[0]='x';
+    var dates = new Array();
+    dates.push('x');
     var success_times=new Array();
-    success_times[0]='data1';
+    success_times.push('data1');
     var failure_times=new Array();
-    failure_times[0]='data2';
+    failure_times.push('data2');
 
     for(i=0;i<arrayLength;i++)
     {
-        var date= JSON.stringify(sampleJson[i].date);
-        console.log("Date : "+date);
+        var load_date = sampleJson[i].date;
+        console.log("Date : "+ load_date);
         
-        var logs= sampleJson[i].logs;
+        //var logs= sampleJson[i].logs;
         
 
-        var success_time=JSON.stringify(logs[0].success);
-        var failure_time=JSON.stringify(logs[1].fail);
+        /*var success_time=JSON.stringify(logs[0].success);
+        var failure_time=JSON.stringify(logs[1].fail);*/
+
+        /*var success_time=logs[0].success;
+        var failure_time=logs[1].fail; */
+
+        var success_time=sampleJson[i].SUCCESS;
+        var failure_time=sampleJson[i].FAILED;       
 
         
         console.log("success_time : "+success_time);
         console.log("failure_time : "+failure_time);
 
-        dates[i+1]=date;
-        success_times[i+1]=success_time;
-        failure_times[i+1]=failure_time;
+        dates.push(load_date);
+        success_times.push(success_time)
+        failure_times.push(failure_time);
 
     }
 
-    console.log("dates - " + dates); 
-    console.log("success_times -" + success_times);
-    console.log("failure_times -" + failure_times);
-    
-    
+    var chart = c3.generate({
+            data: {
+            x: 'x',
+            xFormat: '%Y-%m-%d', 
 
-        var chart = c3.generate({
-        data: {
-        x: 'x',
-        //xFormat: '%Y-%m-%d', 
-        /*columns: [
-        ['x', '2013-01-01', '2013-01-02', '2013-01-03', '2013-01-04', '2013-01-05', '2013-01-06'],
-        ['data1', 30, 200, 100, 400, 150, 250],
-        ['data2', 130, 340, 200, 500, 250, 350]
-        ],*/
-        columns: [dates, success_times, failure_times],
-        colors: {
-        data1: '#F00',
-        data2: '#000',
-        },
-        names: {
-        data1: "test1",
-        data2: "test2",
-        },
-        types: {
-        data1: 'bar',
-        data2: 'bar',
-        },
-        groups: [
-        ['data1', 'data2']
-        ]
-        },
-        legend: {
-        show: false
-        },
-        axis: {
-        x: {
-        type: 'timeseries',
-        tick: {
-        format: "%e %b %y"
-        //format: '%Y-%m-%d'
-        },
-        }
-        }
-});
+            columns: [dates, success_times, failure_times],
+
+            //onclick: function(e) { alert(e.value); },
+
+            colors: {
+                data1: '#66ff66',
+                data2: '#ff6666',
+            },
+
+            names: {
+                data1: "Success",
+                data2: "Failure",
+            },
+
+            types: {
+                data1: 'bar',
+                data2: 'bar',
+            },
+
+            groups: [
+                ['data1', 'data2']
+                ]
+            },
+
+            legend: {
+                show: true,
+
+                position : 'right'
+            },
+
+            grid: {
+                x: {
+                    show: true
+                },
+                y: {
+                    show: true
+                }
+            },
+            
+            axis: {
+                x: {
+                    type: 'timeseries',
+                    tick: {
+                    format: "%e %b %Y"
+                    //format: '%Y-%m-%d'
+                    },
+                    label : {
+                            text : 'Load Date',
+                            position: 'outer-center'
+                    }
+                },
+                y : {
+                    label : {
+                            text : 'Duration (In Minutes)',
+                            position : 'outer-middle'
+                    }
+                }
+            }
+        });
         
         /*setTimeout(function () {
             chart.load({

@@ -1,0 +1,30 @@
+.c3-axis-y 
+{
+  font-size: 13px; 
+}
+
+.c3-axis-x 
+{
+  font-size: 13px;
+}
+
+/*.c3-legend-item
+{
+	font-size: 13px;
+}*/
+
+#datepicker
+{
+	width: 165px;
+	border-style: solid;
+	border-width: 2px;
+	background-color: #e6e6e6;
+	margin-top: 20px;
+}
+
+#chart
+{
+	margin-top: 40px;
+}
+
+

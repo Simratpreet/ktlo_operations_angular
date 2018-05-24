@@ -14,33 +14,34 @@ app.controller('test_api_ctrl',['$scope','$http', function($scope, $http){
         });
         */
 
-    var sampleJson=[
-		{
-			"date" : "01-May-2018",
-			"logs" : [{"success":30},{"fail":40}]
-		},
+    var sampleJson={"load_logs_data" :
+    	[
+			{
+				"date" : "01-May-2018",
+				"logs" : [{"success":30},{"fail":40}]
+			},
 
-		{
-			"date" : "02-May-2018",
-			"logs" : [{"success":40},{"fail":20}]
-		},
+			{
+				"date" : "02-May-2018",
+				"logs" : [{"success":40},{"fail":20}]
+			},
 
-		{
-			"date" : "03-May-2018",
-			"logs" : [{"success":60},{"fail":20}]
-		},
+			{
+				"date" : "03-May-2018",
+				"logs" : [{"success":60},{"fail":20}]
+			},
 
-		{
-			"date" : "04-May-2018",
-			"logs" : [{"success":80},{"fail":15}]
-		},
+			{
+				"date" : "04-May-2018",
+				"logs" : [{"success":80},{"fail":15}]
+			},
 
-		{
-			"date" : "05-May-2018",
-			"logs" : [{"success":50},{"fail":0}]
-		}
-	];
-
+			{
+				"date" : "05-May-2018",
+				"logs" : [{"success":50},{"fail":0}]
+			}
+		]};
+	
 	var arrayLength=sampleJson.length;
 	console.log("arrayLength : "+arrayLength);
 

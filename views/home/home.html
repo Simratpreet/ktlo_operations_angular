@@ -1,10 +1,61 @@
-<div class="container-fluid"  ng-controller="homeCtrl">
+<!-- <div class="container-fluid"  ng-controller="homeCtrl">
 	<div class="row">
 		<div class="col" id="metric1" ng-click="loadFirstMetricPage()">Column 1</div>
 		<div class="col" id="metric2" ng-click="test_api()">Column 2</div>
 		<div class="col" id="metric3">Column 3</div>
 		<div class="col" id="metric4">Column 4</div>
 	</div>
+</div> -->
+
+<div class="container" id="tiles">
+  <section class="cms-boxes">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-3 cms-boxes-outer" ng-click="loadFirstMetricPage()">
+          <div class="cms-boxes-items cms-features">
+            <div class="boxes-align">
+              <div class="small-box">
+                <i class="fa fa-bar-chart" style="font-size:48px">&nbsp;</i>
+                <h2>Load Tracker</h2>                
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3 cms-boxes-outer">
+          <div class="cms-boxes-items cms-features">
+            <div class="boxes-align">
+              <div class="small-box">
+                <i class="fa fa-money" style="font-size:48px">&nbsp;</i>
+                <h2>AWS Cost</h2>                
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3 cms-boxes-outer">
+          <div class="cms-boxes-items cms-features">
+            <div class="boxes-align">
+              <div class="small-box">
+                <i class="fa fa-gears" style="font-size:48px">&nbsp</i>
+				<h2>Cluster</h2>                
+              </div>
+            </div>
+          </div>
+        </div>
+     
+      
+        <div class="col-md-3 cms-boxes-outer">
+          <div class="cms-boxes-items cms-features">
+            <div class="boxes-align">
+              <div class="small-box">
+                <i class="fa fa-edit" style="font-size:48px">&nbsp;</i>
+                <h2>ISM Tickets</h2>                
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+  </section>
 </div>
 
 
