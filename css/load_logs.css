@@ -13,14 +13,21 @@
 	font-size: 13px;
 }*/
 
-#datepicker
+/*#datepicker
 {
-	width: 165px;
+	width: 185px;
 	border-style: solid;
 	border-width: 2px;
 	background-color: #e6e6e6;
+	margin-left: 6px;
 	margin-top: 20px;
-}
+}*/
+
+.demo { position: relative; width: 100px;}
+      .demo i {
+        position: absolute; bottom: 10px; right: 24px; top: auto; cursor: pointer;
+      }
+
 
 #chart
 {
