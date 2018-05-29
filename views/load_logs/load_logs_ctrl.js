@@ -1,5 +1,9 @@
 app.controller('load_logs_ctrl', function($scope, $http){
-    $scope.date_range="23 Mar 18";
+    $scope.db = [];
+
+    var dateToday = new Date();
+    
+    $scope.date_range = "23 Mar 2018";
     $scope.start_date = -1;
     $scope.end_date = -1;
     
@@ -9,17 +13,18 @@ app.controller('load_logs_ctrl', function($scope, $http){
     get_data.end_date = $scope.end_date;
 
     //Calculate yesterday's date
-    var dateToday = new Date();
-    //dateYesterday.setDate(dateToday.getDate() - 1);
+    var dateYesterday = new Date();
+    dateYesterday.setDate(dateToday.getDate() - 1);
 
     $('input[name="daterange"]').daterangepicker({
         opens : 'left',
         minDate : new Date('2018-03-23'),
-        maxDate : dateToday
+        maxDate : dateYesterday
 
         //maxDate : 
     }, function(start, end, label) {
         console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
+        $scope.global = false;
         $scope.start_date = start.format('YYYY-MM-DD');
         $scope.end_date = end.format('YYYY-MM-DD');
         get_data.start_date = $scope.start_date;
@@ -34,7 +39,7 @@ app.controller('load_logs_ctrl', function($scope, $http){
         console.log("get_data : " + JSON.stringify(get_data));
         $http({
                 method : 'GET',
-                url : 'http://10.204.43.206:5010/loadtracker',
+                url : 'http://10.204.43.206:5011/loadtracker',
                 params : get_data
         }).then(function successCallback(responsejson) {
                 $scope.data_json = responsejson.data.load_logs_data;
@@ -49,44 +54,163 @@ app.controller('load_logs_ctrl', function($scope, $http){
         }); 
         console.log("Finished generating chart...");
     }
-
-var detaildata = function(){
-    console.log("Inside detail data...");
-    tableJson = $scope.tabledata;
-
-    /*console.log("tabledata : "+ JSON.stringify(tableJson));
-    var txt = txt + "<table border='1'>";
-    for (var i = 0; i < tableJson.length; i++) {
-
-            txt += "<tr><td>" + tableJson[i].date + "</td>" + "<td>" + tableJson[i].status + "</td>" + "<td>" + tableJson[i].duration + "</td></tr>" ;  
-           
-        }
-        txt = txt + "</table>" ;
-        document.getElementById("table_data").innerHTML = txt;*/
-        db = [];
-    var dataLength = tableJson.length;
-  for (var i = 0; i < dataLength; i++) {
-      var date = tableJson[i].date;
-      var status = tableJson[i].status;
-      var sdate = tableJson[i].start_ts;
-      var edate = tableJson[i].end_ts;
-      var duration = tableJson[i].duration;
-      //console.log("Name : " + name);
-      //console.log("date : " + date);
-      db.push({
-      "id":date,
-      "name": status,
-      "sdate" : sdate,
-      "edate" : edate,
-      "duration" : duration
-  })
-          
-}
-console.log("tableJson1 : " + tableJson);
-
-}
    
+    var detaildata = function(){
+        $scope.global = true;
+        tableJson = $scope.tabledata;
+        var request = {
+            limit: 10,
+            page: 1,
+            order: [
+              {field:"id", sorting:"ASC"},
+              //{field:"name", sorting:"DESC"},
+            ],
+            like: {
+              "name": "",
+            }
+          };
 
+          $scope.tableviewOptions = {
+            template: {
+              "head.cell": null,
+              "body.cell": null,
+              "body.cell.edit": null,
+              "foot": null,
+              "pager": null,
+              "pager.limit": null,
+              "pager.selection": null,
+              "pager.controls": null,
+            },
+            columns: [
+                      {
+                        field: "id", // used as identifier for sorting or filtering. creates CSS class "column-{{field}}"
+                        name: "id", // creates CSS class "column-{{name}}"
+                        title: "Date", // column title
+                        placeholder: "Filter by Date", // placeholder for filter input
+                        sortable:true,
+                        filterable:true 
+                       
+                      },
+                      {
+                        field:"name",
+                        title:"Status",
+                        sortable:true,
+                        filterable:true,
+                        placeholder: "Filter by Status"
+                      },
+                      {field:"sdate", title:"Start Date", sortable:true},
+                      {field:"edate", title:"End Date", sortable:true},
+                      {field:"duration", title:"Duration", sortable:true}
+                    ],
+            provider: dataProvider,
+            request: request,
+            
+            scrollable: {
+              maxHeight: "400px"
+            },
+            multisorting: false,
+            limits: [10, 25, 50, 100],
+            theme: null,
+            debug:true
+          };
+
+          
+
+          
+          $scope.myFn = function ($row) {
+            alert ("$scope.myFn($row):\n" + JSON.stringify($row, null, "    "));
+          };
+
+          var dataLength = tableJson.length;
+          var db = [];
+          for (var i = 0; i < dataLength; i++) {
+              var date = tableJson[i].date;
+              var status = tableJson[i].status;
+              var sdate = tableJson[i].start_ts;
+              var edate = tableJson[i].end_ts;
+              var duration = tableJson[i].duration;
+              //console.log("Name : " + name);
+              //console.log("date : " + date);
+              db.push({
+              "id":date,
+              "name": status,
+              "sdate" : sdate,
+              "edate" : edate,
+              "duration" : duration
+          })
+          }
+          console.log("DB: "+db);
+
+          function dataProvider (request, callback) {
+            console.log("##REQUEST", request);
+            var data = db.slice(0);
+            if (request.order.length && request.order[0] && request.order[0].field == "id") {
+              data.sort(function(a, b) {
+                return request.order[0].sorting == "ASC" ? Date.parse(a.id) - Date.parse(b.id)
+                     : request.order[0].sorting == "DESC" ? Date.parse(b.id) - Date.parse(a.id)
+                     : 0;
+              });
+            }
+            else if (request.order.length && request.order[0] && ["name"].indexOf(request.order[0].field) >= 0) {
+              data.sort(function(a, b) {
+                var A = (request.order[0].sorting == "ASC" ? a[request.order[0].field] : b[request.order[0].field]).toLowerCase();
+                var B = (request.order[0].sorting == "ASC" ? b[request.order[0].field] : a[request.order[0].field]).toLowerCase();
+                return A < B ? -1
+                     : A > B ? 1
+                     : 0
+                ;
+              });
+            }
+            else if (request.order.length && request.order[0] && request.order[0].field == "duration") {
+              data.sort(function(a, b) {
+                return request.order[0].sorting == "ASC" ? a.duration - b.duration
+                     : request.order[0].sorting == "DESC" ? b.duration - a.duration
+                     : 0;
+              });
+            }
+            else if (request.order.length && request.order[0] && request.order[0].field == "sdate") {
+              data.sort(function(a, b) {
+                return request.order[0].sorting == "ASC" ? Date.parse(a.sdate) - Date.parse(b.sdate)
+                     : request.order[0].sorting == "DESC" ? Date.parse(b.sdate) - Date.parse(a.sdate)
+                     : 0;
+              });
+            }
+            else if (request.order.length && request.order[0] && request.order[0].field == "edate") {
+              data.sort(function(a, b) {
+                return request.order[0].sorting == "ASC" ? Date.parse(a.edate) - Date.parse(b.edate)
+                     : request.order[0].sorting == "DESC" ? Date.parse(b.edate) - Date.parse(a.edate)
+                     : 0;
+              });
+            }
+            if (request.like.name) {
+              data = data.filter(function(o){
+                return o.name && o.name.toLowerCase().indexOf(request.like.name.toLowerCase()) > -1;
+              });
+            }
+
+            if (request.like.id) {
+              data = data.filter(function(o){
+                return o.id && o.id.toLowerCase().indexOf(request.like.id.toLowerCase()) > -1;
+              });
+            }
+           
+            var amount = data.length;
+            var limit = request.limit > 0 ? request.limit : 10;
+            var page = request.page > 0 &&  request.page*limit-limit <= amount ? request.page : 1;
+            var begin = page * limit - limit;
+            var end = begin + limit;
+            var rows = data.slice(begin, end);
+            var response = {
+              page: page,
+              limit: limit,
+              amount: amount,
+              rows: rows
+            };
+            callback(response);
+          }
+
+          //console.log("Exiting table details....");
+    }
 
 //console.log("tableJson2 : " + tableJson);
 var c3chart=function(){
@@ -107,7 +231,7 @@ var c3chart=function(){
     for(i=0;i<arrayLength;i++)
     {
         var load_date = sampleJson[i].date;
-        console.log("Date : "+ load_date);
+        //console.log("Date : "+ load_date);
         
         //var logs= sampleJson[i].logs;
         
@@ -122,8 +246,8 @@ var c3chart=function(){
         var failure_time=sampleJson[i].FAILED;       
 
         
-        console.log("success_time : "+success_time);
-        console.log("failure_time : "+failure_time);
+        //console.log("success_time : "+success_time);
+        //console.log("failure_time : "+failure_time);
 
         dates.push(load_date);
         success_times.push(success_time)
@@ -222,134 +346,6 @@ var c3chart=function(){
     }
 
     onload();
-    
-     var request = {
-    limit: 10,
-    page: 1,
-    order: [
-      {field:"id", sorting:"ASC"},
-      {field:"name", sorting:"DESC"}
-    ],
-    like: {
-      "name": "",
-    }
-  };
-
-  $scope.tableviewOptions = {
- 
-    columns: [
-      {
-        field: "id", // used as identifier for sorting or filtering. creates CSS class "column-{{field}}"
-        name: "id", // creates CSS class "column-{{name}}"
-        title: "Date", // column title
-        placeholder: "Filter by Date", // placeholder for filter input
-        sortable:true,
-        filterable:true 
-       
-      },
-      {
-        field:"name",
-        title:"Status",
-        sortable:true,
-        filterable:true,
-        placeholder: "Filter by Status"
-      },
-      {field:"sdate", title:"Start Date", sortable:true},
-      {field:"edate", title:"End Date", sortable:true},
-      {field:"duration", title:"Duration", sortable:true}
-    ],
-    provider: dataProvider,
-    request: request,
-    
-    scrollable: {
-      maxHeight: "400px"
-    },
-    multisorting: false,
-    limits: [10, 25, 50, 100],
-    theme: null,
-    debug:true
-  };
-
- 
-
-  
-
-  $scope.myFn = function ($row) {
-    console.log("Inside myFn");
-    alert ("$scope.myFn($row):\n" + JSON.stringify($row, null, "    "));
-
-  };
-
-  var amount = 1234;
-  var db = [];
-  for (var i=1; i<=amount; i++) {
-    var name = "nikhil";
-    db.push({
-      id:i,
-      name: name,
-      
-    });
-  }
-  /*console.log("json: "+ tableJson);
-  var db = [];
-  var dataLength = tableJson.length;
-  for (var i = 0; i < dataLength; i++) {
-      var name = tableJson[i].status;
-      //console.log("Name : " + name);
-      db.push({
-      "id":i,
-      name: name
-  })
-  }*/
-
-  console.log(db);
-
-  function dataProvider (request, callback) {
-    console.log("##REQUEST", request);
-    var data = db.slice(0);
-    if (request.order.length && request.order[0] && request.order[0].field == "id") {
-      data.sort(function(a, b) {
-        return request.order[0].sorting == "ASC" ? a.id - b.id
-             : request.order[0].sorting == "DESC" ? b.id - a.id
-             : 0;
-      });
-    }
-    else if (request.order.length && request.order[0] && ["name", "email"].indexOf(request.order[0].field) >= 0) {
-      data.sort(function(a, b) {
-        var A = (request.order[0].sorting == "ASC" ? a[request.order[0].field] : b[request.order[0].field]).toLowerCase();
-        var B = (request.order[0].sorting == "ASC" ? b[request.order[0].field] : a[request.order[0].field]).toLowerCase();
-        return A < B ? -1
-             : A > B ? 1
-             : 0
-        ;
-      });
-    }
-    if (request.like.name) {
-      data = data.filter(function(o){
-        return o.name && o.name.toLowerCase().indexOf(request.like.name.toLowerCase()) > -1;
-      });
-    }
-    if (request.like.email) {
-      data = data.filter(function(o){
-        return o.email && o.email.toLowerCase().indexOf(request.like.email.toLowerCase()) > -1;
-      });
-    }
-    var amount = data.length;
-    var limit = request.limit > 0 ? request.limit : 10;
-    var page = request.page > 0 &&  request.page*limit-limit <= amount ? request.page : 1;
-    var begin = page * limit - limit;
-    var end = begin + limit;
-    var rows = data.slice(begin, end);
-    var response = {
-      page: page,
-      limit: limit,
-      amount: amount,
-      rows: rows
-    };
-    callback(response);
-  }
-     
-
       
 });
 
