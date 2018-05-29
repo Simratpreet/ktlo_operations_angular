@@ -16,10 +16,15 @@ app.controller('load_logs_ctrl', function($scope, $http){
     var dateYesterday = new Date();
     dateYesterday.setDate(dateToday.getDate() - 1);
 
+    var start_date = new Date();
+    start_date.setDate(dateToday.getDate() - 30);
+
     $('input[name="daterange"]').daterangepicker({
         opens : 'left',
         minDate : new Date('2018-03-23'),
-        maxDate : dateYesterday
+        maxDate : dateYesterday,
+        startDate : start_date,
+        endDate : dateYesterday
 
         //maxDate : 
     }, function(start, end, label) {
