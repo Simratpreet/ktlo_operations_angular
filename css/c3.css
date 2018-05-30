@@ -1,8 +1,12 @@
 /*-- Chart --*/
 .c3 svg {
   font: 10px sans-serif;
-  -webkit-tap-highlight-color: transparent; }
-
+  /*-webkit-tap-highlight-color: transparent;*/
+  
+ }
+.c3 {
+  max-height: 450px;
+}
 .c3 path, .c3 line {
   fill: none;
   stroke: #000; }
@@ -39,7 +43,7 @@
   fill: #aaa; }
 
 .c3-xgrid, .c3-ygrid {
-  stroke-dasharray: 3 3; }
+  stroke-dasharray: 5 5; }
 
 /*-- Text on Chart --*/
 .c3-text.c3-empty {

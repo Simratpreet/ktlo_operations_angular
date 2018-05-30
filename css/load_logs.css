@@ -6,7 +6,9 @@
 .c3-axis-x 
 {
   font-size: 13px;
+ 
 }
+
 
 /*.c3-legend-item
 {
@@ -32,5 +34,7 @@
 #chart
 {
 	margin-top: 40px;
+	margin-bottom: 40px;
+	
 }
 

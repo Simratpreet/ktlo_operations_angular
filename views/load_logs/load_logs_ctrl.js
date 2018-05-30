@@ -263,7 +263,7 @@ var c3chart=function(){
     var chart = c3.generate({
             data: {
             x: 'x',
-            xFormat: '%Y-%m-%d', 
+            //xFormat: '%Y-%m-%d', 
 
             columns: [dates, success_times, failure_times],
 
@@ -297,7 +297,7 @@ var c3chart=function(){
 
             grid: {
                 x: {
-                    show: true
+                    show: false
                 },
                 y: {
                     show: true
@@ -308,8 +308,10 @@ var c3chart=function(){
                 x: {
                     type: 'timeseries',
                     tick: {
-                    format: "%e %b %Y"
-                    //format: '%Y-%m-%d'
+                    format: "%e-%b-%Y",
+                    culling : false,
+                    rotate : -60
+
                     },
                     label : {
                             text : 'Load Date',
@@ -320,6 +322,7 @@ var c3chart=function(){
                     label : {
                             text : 'Duration (In Minutes)',
                             position : 'outer-middle'
+
                     }
                 }
             }
