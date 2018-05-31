@@ -2,7 +2,7 @@ var app = angular.module('ktloApp', ["ui.router", "tableview"]);
 
 
 app.config(function($stateProvider, $urlRouterProvider) {
-	$urlRouterProvider.otherwise('/home');
+	$urlRouterProvider.otherwise('/load_logs');
     $stateProvider.state("home", {
     	url:"/home",
         templateUrl : "views/home/home.html",

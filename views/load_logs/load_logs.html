@@ -1,32 +1,53 @@
 <!--<p>Hello</p>-->
-<div class="container-fluid">
-	&nbsp;&nbsp;&nbsp;
-    <h1>Load Tracker</h1>
-    
-	    <!-- <div id="monthPicker">
-	    	<select ng-model="selectedMonth" ng-options="x for x in months">
-			</select>
-	    </div> -->
-	<!-- <i class="fa fa-calendar" style="font-size: 36px;"></i><input type="text" name="daterange" value="01/01/2018 - 01/01/2050" id="datepicker" />  -->
-	<div class = "row">
-		<div class="col-md-2 col-md-offset-2 demo"  >
-			<input type="text" class="form-control" name="daterange"  value = "01/01/2018 - 01/01/2050" >
-		    <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>
-		</div>
-	</div>
-	
-    <div id="chart" ></div>
-    <!-- <div id="table_data"></div> -->
-   
-   <!-- <div tableview = "configuration"></div> -->
+<style type="text/css">
+.c3-xgrid,
+.c3-ygrid {
+    stroke-dasharray: 0 0;
+}
 
-    <div tableview="tableviewOptions" tableview-theme="'material'" ng-if="global" ></div>
+.c3-ygrids line {
 
+    fill: none;
+    opacity: 0.4
+}
 
-    <!-- <script type="text/ng-template" id="load_logs_ctrl.body.cell.id">
-      <a href='#' ng-click='$scope.myFn($row)'>{{$cell}}</a>
-    </script> -->
-
-    
-
-</div>
+.c3-axis-x-label {
+    margin-top: 30px;
+}
+.c3-tooltip-container {
+    background: white;
+    border: 1px solid rgb(204, 204, 204);
+    font-family: Arial;
+    font-size: 16px;
+    padding: 2px;
+}
+main {
+    margin: 15px 0 70px;
+}
+</style>
+<main>
+    <div class="container-fluid">
+        <div class="row bg-title">
+            <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+                <h4 class="page-title">Load Tracker</h4>
+            </div>
+        </div>
+        <div class="row" style="padding: 25px">
+            <div class=" ">
+                <p>Date Range</p>
+            </div>
+            <div class="col-md-2 col-md-offset-2 demo" style="top :-7px">
+                <input type="text" class="form-control" name="daterange" value="01/01/2018 - 01/01/2050">
+                <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>
+            </div>
+        </div>
+        <div class="white-box">
+            <h3 class="box-title">Run Time</h3>
+            <div id="chart"></div>
+        </div>
+        <div class="white-box">
+            <h3 class="box-title">Run Time Details</h3>
+            <div tableview="tableviewOptions" tableview-theme="'material'" ng-if="global"></div>
+        </div>
+    </div>
+</main>

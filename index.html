@@ -1,64 +1,78 @@
 <!DOCTYPE html>
-
 <html lang="en" ng-app="ktloApp">
 
-	<head>
-		<title>Home Page</title>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
+<head>
+    <title>Home Page</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/home.css">
+    <link rel="stylesheet" type="text/css" href="css/c3.css">
+    <link rel="stylesheet" type="text/css" href="css/load_logs.css">
+    <!-- <link rel="stylesheet" type="text/css" href="css/index.css"> -->
+    <link rel="stylesheet" type="text/css" href="dist/angular.tableview.min.css">
+    <link rel="stylesheet" type="text/css" href="dist/angular.tableview.material.min.css">
+    <link rel="stylesheet" type="text/css" href="css/animate.css">
+    <link rel="stylesheet" type="text/css" href="css/spinners.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="css/default.css"  id="theme">
+</head>
 
-		<link rel="stylesheet" href="css/bootstrap.min.css">
-		<link rel="stylesheet" type="text/css" href="css/home.css">
-		<link rel="stylesheet" type="text/css" href="css/c3.css">
-		<link rel="stylesheet" type="text/css" href="css/load_logs.css">
-		<link rel="stylesheet" type="text/css" href="css/index.css">
-		<link rel="stylesheet" type="text/css" href="dist/angular.tableview.min.css">
-		<link rel="stylesheet" type="text/css" href="dist/angular.tableview.material.min.css">
-		
-
-  		<!--
-  		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
-  		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
-  		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
-  		-->
-	</head>
-
-	<body>
-		<div id="nav1">
-			<nav class="navbar navbar-expand-lg ">
-				<!--<img class="navbar-brand" src="logo\2000px-Amgen.svg.png" alt="logo">-->
-				<a class="navbar-brand" href="#"><img src="img/logo-amgen.png" alt="logo" style="width:120px;height:30px;"></a>
-				<ul class="navbar-nav">
-			    	<li class="nav-item">
-			      		<a ui-sref="home" class="nav-link" style="color: white;"><b>CMD KTLO Operations</b></a>
-			    	</li>
-			  	</ul>
-			</nav>
-		</div>
-		&nbsp;
-		<!-- <a ui-sref="home">Home</a> -->
-		<div class="ui-view"></div>
-	</body>
-	<script src="js/bootstrap.min.js"></script>
-	<script src="js/angular.min.js"></script>
-	<script src="//unpkg.com/@uirouter/angularjs@1.0.7/release/angular-ui-router.min.js"></script>
-	<script type="text/javascript" src="app.js"></script>
-	<script type="text/javascript" src="views/home/homeCtrl.js"></script>
-	<script type="text/javascript" src="views/load_logs/load_logs_ctrl.js"></script>
-	<script type="text/javascript" src="views/test_api/test_api_ctrl.js"></script>
-	<script type="text/javascript" src="js/c3.min.js"></script>
-	<script src="https://d3js.org/d3.v5.js"></script>
-
-	<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
-	<script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
-	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
-	<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css"> 
-
-	<!--for table -->
-	
-
-   <!--  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.8/angular.min.js"></script> -->
-    
-    <script type="text/javascript" src="dist/angular.tableview.min.js"></script>
+<body class="fix-header">
+    <div id="wrapper">
+        <nav class="navbar navbar-default navbar-static-top m-b-0" style="padding: 0">
+            <div class="navbar-header" style="background: #0063C3">
+                <div class="top-left-part" style="background: #0063C3">
+                    <a class="logo" href="index.html">
+                        <span class="hidden-xs">
+                       <img src="img/logo-amgen.png" alt="home" class="light-logo">
+                     </span> </a>
+                </div>
+                <div style="margin-top: 10px">
+                <a ui-sref="home" style="color: white;" class="offset-md-4"><b style="font-size: 24px;font-weight: 400;">CMD KTLO Operations</b></a>
+                </div>
+            </div>
+        </nav>
+        <div class="navbar-default sidebar" role="navigation">
+            <div class="sidebar-nav slimscrollsidebar">
+                <div class="sidebar-head">
+                    <h3><span class="fa-fw open-close"><i class="ti-close ti-menu"></i></span> <span class="hide-menu"><a class="navbar-brand" href="#"><img src="img/logo-amgen.png" alt="logo" style="width:120px;height:30px;"></a></span></h3>
+                </div>
+                <ul class="nav" id="side-menu">
+                    <li style="padding: 70px 0 0;">
+                        <a ui-sref="load_logs" ui-sref-active="active" class="waves-effect"><i class="fa fa-bar-chart fa-fw" aria-hidden="true"></i>Load Tracker</a>
+                    </li>
+                    <li>
+                        <a ui-sref="test_api" ui-sref-active="active" class="waves-effect"><i class="fa fa-money fa-fw" aria-hidden="true"></i>AWS Cost</a>
+                    </li>
+                    <li>
+                        <a ui-sref="cluster" ui-sref-active="active" class="waves-effect"><i class="fa fa-gears fa-fw" aria-hidden="true"></i>Cluster</a>
+                    </li>
+                    <li>
+                        <a ui-sref="ism" ui-sref-active="active" class="waves-effect"><i class="fa fa-edit fa-fw" aria-hidden="true"></i>ISM Tickets</a>
+                    </li>
+                     
+                </ul>
+            </div>
+        </div>
+    </div>
+ 
+    <div id="page-wrapper" class="ui-view"></div>
+</body>
+<script src="js/angular.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="//unpkg.com/@uirouter/angularjs@1.0.7/release/angular-ui-router.min.js"></script>
+<script type="text/javascript" src="app.js"></script>
+<script type="text/javascript" src="views/home/homeCtrl.js"></script>
+<script type="text/javascript" src="views/load_logs/load_logs_ctrl.js"></script>
+<script type="text/javascript" src="views/test_api/test_api_ctrl.js"></script>
+<script type="text/javascript" src="js/c3.min.js"></script>
+<script src="https://d3js.org/d3.v5.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+<!--for table -->
+<!--  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.8/angular.min.js"></script> -->
+<script type="text/javascript" src="dist/angular.tableview.min.js"></script>
