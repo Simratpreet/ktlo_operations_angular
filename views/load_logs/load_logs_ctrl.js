@@ -104,7 +104,7 @@ app.controller('load_logs_ctrl', function($scope, $http) {
                         },
                         { field: "sdate", title: "Start Date", sortable: true },
                         { field: "edate", title: "End Date", sortable: true },
-                        { field: "duration", title: "Duration", sortable: true }
+                        { field: "duration", title: "Duration (in min)", sortable: true }
                     ],
                     provider: dataProvider,
                     request: request,
@@ -215,8 +215,7 @@ app.controller('load_logs_ctrl', function($scope, $http) {
             var c3chart = function() {
 
                 sampleJson = $scope.data_json;
-                //console.log("sampleJson : " + sampleJson);
-                //console.log(typeof(sampleJson));
+                
                 var arrayLength = sampleJson.length;
                 console.log("arrayLength : " + arrayLength);
 
@@ -229,16 +228,6 @@ app.controller('load_logs_ctrl', function($scope, $http) {
 
                 for (i = 0; i < arrayLength; i++) {
                     var load_date = sampleJson[i].date;
-                    //console.log("Date : "+ load_date);
-
-                    //var logs= sampleJson[i].logs;
-
-
-                    /*var success_time=JSON.stringify(logs[0].success);
-                    var failure_time=JSON.stringify(logs[1].fail);*/
-
-                    /*var success_time=logs[0].success;
-                    var failure_time=logs[1].fail; */
 
                     var success_time = sampleJson[i].SUCCESS;
                     var failure_time = sampleJson[i].FAILED;
@@ -264,11 +253,9 @@ app.controller('load_logs_ctrl', function($scope, $http) {
 
                             columns: [dates, success_times, failure_times],
 
-                            //onclick: function(e) { alert(e.value); },
-
                             colors: {
-                                data1: '#66ff66',
-                                data2: '#ff6666',
+                                data1: '#a0ca98',
+                                data2: 'rgba(243, 49, 85, 0.86)'
                             },
 
                             names: {
@@ -295,66 +282,47 @@ app.controller('load_logs_ctrl', function($scope, $http) {
                                     }
                                     
                                 }
-                            },
-                            legend: {
-                                show: true,
+                        },
+                        legend: {
+                            show: true,
+                            position: 'inset'
+                           
+                        },
 
-                                position: 'bottom'
+                        grid: {
+                            x: {
+                                show: false
                             },
+                            y: {
+                                show: true
+                            }
+                        },
 
-                            grid: {
-                                x: {
-                                    show: false
+                        axis: {
+                            x: {
+                                type: 'timeseries',
+                                tick: {
+                                    format: "%e-%b-%Y",
+                                    culling: false,
+                                    rotate: -60
+
                                 },
-                                y: {
-                                    show: true
-                                }
-                            },
-
-                            axis: {
-                                x: {
-                                    type: 'timeseries',
-                                    tick: {
-                                        format: "%e-%b-%Y",
-                                        culling: false,
-                                        rotate: -60
-
-                                    },
-                                    label: {
-                                        text: 'Load Date',
-                                        position: 'outter-center'
-                                    },
-                                    height: 100
+                                label: {
+                                    text: 'Load Date',
+                                    position: 'outer-center'
                                 },
-                                y: {
-                                    label: {
-                                        text: 'Duration (In Minutes)',
-                                        position: 'outer-middle'
+                                height: 110
+                            },
+                            y: {
+                                label: {
+                                    text: 'Duration (In Minutes)',
+                                    position: 'outer-middle'
 
-                                    }
                                 }
                             }
-                        });
+                        }
+                    });
 
-                    /*setTimeout(function () {
-                        chart.load({
-                            columns: [
-                                ['data4', 1200, 1300, 1450, 1600, 1520, 1820],
-                            ]
-                        });
-                    }, 1000);
-
-                    setTimeout(function () {
-                        chart.load({
-                            columns: [
-                                ['data5', 200, 300, 450, 600, 520, 820],
-                            ]
-                        });
-                    }, 2000);
-
-                    setTimeout(function () {
-                        chart.groups([['data1', 'data2', 'data3', 'data4', 'data5']])
-                    }, 3000);*/
 
                     setTimeout(function() {
                         chart.groups([
