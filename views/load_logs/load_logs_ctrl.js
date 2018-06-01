@@ -17,7 +17,7 @@ app.controller('load_logs_ctrl', function($scope, $http) {
             dateYesterday.setDate(dateToday.getDate() - 1);
 
             var start_date = new Date();
-            start_date.setDate(dateToday.getDate() - 30);
+            start_date.setDate(dateToday.getDate() - 31);
 
             $('input[name="daterange"]').daterangepicker({
                 opens: 'left',
@@ -102,9 +102,9 @@ app.controller('load_logs_ctrl', function($scope, $http) {
                             filterable: true,
                             placeholder: "Filter by Status"
                         },
-                        { field: "sdate", title: "Start Date", sortable: true },
-                        { field: "edate", title: "End Date", sortable: true },
-                        { field: "duration", title: "Duration (in min)", sortable: true }
+                        { field: "sdate", title: "Start Time", sortable: true },
+                        { field: "edate", title: "End Time", sortable: true },
+                        { field: "duration", title: "Duration (in mins)", sortable: true }
                     ],
                     provider: dataProvider,
                     request: request,
@@ -260,7 +260,7 @@ app.controller('load_logs_ctrl', function($scope, $http) {
 
                             names: {
                                 data1: "Success",
-                                data2: "Failure",
+                                data2: "Failed",
                             },
 
                             types: {
@@ -278,7 +278,7 @@ app.controller('load_logs_ctrl', function($scope, $http) {
                                      
                                     value: function(value, ratio, id) {
                                         
-                                        return value + " Min";
+                                        return value + " mins";
                                     }
                                     
                                 }
@@ -304,7 +304,8 @@ app.controller('load_logs_ctrl', function($scope, $http) {
                                 tick: {
                                     format: "%e-%b-%Y",
                                     culling: false,
-                                    rotate: -60
+                                    //rotate: -60
+                                    fit: true
 
                                 },
                                 label: {
@@ -315,7 +316,7 @@ app.controller('load_logs_ctrl', function($scope, $http) {
                             },
                             y: {
                                 label: {
-                                    text: 'Duration (In Minutes)',
+                                    text: 'Duration (in mins)',
                                     position: 'outer-middle'
 
                                 }
