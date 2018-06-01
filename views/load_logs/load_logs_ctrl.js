@@ -44,7 +44,7 @@ app.controller('load_logs_ctrl', function($scope, $http) {
                 console.log("get_data : " + JSON.stringify(get_data));
                 $http({
                     method: 'GET',
-                    url: 'http://10.204.43.206:5011/loadtracker',
+                    url: 'http://10.204.43.206:5012/loadtracker',
                     params: get_data
                 }).then(function successCallback(responsejson) {
                     $scope.data_json = responsejson.data.load_logs_data;
@@ -260,7 +260,7 @@ app.controller('load_logs_ctrl', function($scope, $http) {
                         },
                         data: {
                             x: 'x',
-                            //xFormat: '%Y-%m-%d', 
+                            xFormat: '%e-%b-%Y', 
 
                             columns: [dates, success_times, failure_times],
 
