@@ -304,8 +304,8 @@ app.controller('load_logs_ctrl', function($scope, $http) {
                                 tick: {
                                     format: "%e-%b-%Y",
                                     culling: false,
-                                    //rotate: -60
-                                    fit: true
+                                    rotate: -60
+
 
                                 },
                                 label: {
