@@ -52,7 +52,7 @@ main {
                     </span>
                     <div class="info-box-content">
                         <span class="info-box-text">Incidents</span>
-                        <span class="info-box-number">50</span>
+                        <span class="info-box-number"  ng-bind="inc"></span>
                     </div>
                 </div>
             </div>
@@ -63,7 +63,7 @@ main {
                     </span>
                     <div class="info-box-content">
                         <span class="info-box-text">Service Requests</span>
-                        <span class="info-box-number">50</span>
+                        <span class="info-box-number" ng-bind="sr"></span>
                     </div>
                 </div>
             </div>
@@ -74,7 +74,7 @@ main {
                     </span>
                     <div class="info-box-content">
                         <span class="info-box-text">Change Requests</span>
-                        <span class="info-box-number">50</span>
+                        <span class="info-box-number" ng-bind="cr"></span>
                     </div>
                 </div>
             </div>
@@ -86,11 +86,12 @@ main {
             <h3 class="box-title">Pie Chart </h3>
             <div id="chart"></div>
         </div>
-        <div class="col-md-8">
+        <div class="col-md-9" >
             <h3 class="box-title">Table</h3>
             <div tableview="tableviewOptions" tableview-theme="'material'" ng-if="global"></div>
         </div>
         </div>
+
     </div>
     </div>
 </main>

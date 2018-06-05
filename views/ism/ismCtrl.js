@@ -1,5 +1,5 @@
 app.controller('ismCtrl', function($scope, $http) {
-            $scope.db = [];
+            
 
             var dateToday = new Date();
 
@@ -42,8 +42,26 @@ app.controller('ismCtrl', function($scope, $http) {
             var onload = function() {
                 console.log("Inside onload function...");
                 console.log("get_data : " + JSON.stringify(get_data));
-                c3chart();
-                detaildata();   
+                $http({
+                    method: 'GET',
+                    url: 'http://10.204.43.206:5012/ism_tickets'
+                    
+                }).then(function successCallback(responsejson) {
+                    /*$scope.data_json = responsejson.data.load_logs_data;
+                    $scope.tabledata = responsejson.data.detail_data;*/
+                    $scope.data_received = responsejson.data;
+                    $scope.inc = $scope.data_received.incidents;
+                    $scope.sr = $scope.data_received.service_request;
+                    $scope.cr = $scope.data_received.change_request;
+                    //console.log("responsejson.data : " + JSON.stringify($scope.data_received));
+
+                    c3chart();
+                    detaildata();
+
+                }, function errorCallback(responseValue) {
+                    console.log("error");
+                });
+
                 console.log("Finished generating chart...");
             }
 
@@ -56,9 +74,9 @@ app.controller('ismCtrl', function($scope, $http) {
                 data: {
                     // iris data from R
                     columns: [
-                        ['INC', 30],
-                        ['SR', 50],
-                        ['CR', 20]
+                        ['INC', $scope.inc],
+                        ['SR', $scope.sr],
+                        ['CR', $scope.cr]
                     ],
                     type : 'pie',
                     onclick: function (d, i) { console.log("onclick", d, i); },
@@ -99,26 +117,21 @@ app.controller('ismCtrl', function($scope, $http) {
                   {
                     field: "id", // used as identifier for sorting or filtering. creates CSS class "column-{{field}}"
                     name: "id", // creates CSS class "column-{{name}}"
-                    title: "Date", // column title
-                    placeholder: "Filter by Date", // placeholder for filter input
+                    title: "Number", // column title
+                    placeholder: "Filter by Number", // placeholder for filter input
                     sortable:true,
-                    filterable:true,
-                    template: {
-                      "head.cell": null,
-                      "body.cell": "Ctrl.body.cell.id",
-                      "foot.cell": null,
-                    },
-                  },
+                    filterable:true
+                },
                   {
                     field:"name",
-                    title:"Status",
-                    sortable:true,
-                    filterable:true,
-                    placeholder: "Filter by Status"
+                    title:"Short Description"
+                                        
                   },
-                  {field:"sdate", title:"Start Date", sortable:true},
-                  {field:"edate", title:"End Date", sortable:true},
-                  {field:"duration", title:"Duration", sortable:true}
+                  {field:"priority", title:"Priority", sortable:true},
+                  {field:"state", title:"State", sortable:true},
+                  {field:"opened", title:"Opened", sortable:true},
+                  {field:"due_date", title:"Due Date", sortable:true},
+                  {field:"closed", title:"Closed", sortable:true}
                 ],
                 provider: dataProvider,
                 request: request,
@@ -132,45 +145,42 @@ app.controller('ismCtrl', function($scope, $http) {
                 debug:true
                 };
 
-                function fieldValidator (column, row, field, value) {
-                var status = typeof value == "string" && value.trim().length;
-                return {
-                  message: status ? "" : "The field '" + column.title + "' can not be empty",
-                  status: status
-                };
-                }
-
-                function saveValidChangedField (column, row, field, value) {
-                console.log (
-                  arguments.callee.name + "(column, row, field, value) =>",
-                  field,
-                  "=",
-                  value,
-                  column,
-                  row
-                );
-                }
-
-
+                
 
                 $scope.myFn = function ($row) {
                 alert ("$scope.myFn($row):\n" + JSON.stringify($row, null, "    "));
                 };
 
-                var amount = 1234;
-                var db = [];
-                for (var i=1; i<=amount; i++) {
-                var name = "nikhil";
-                db.push({
-                  "id":i,
-                  name: name,
-                  email: name.toLowerCase().replace(/[^a-z]+/ig, ".") + "@mail.com"
-                });
+                
+                
+                no_records = $scope.data_received.ticket_details.length;
+                tickets = $scope.data_received.ticket_details;
+                var ism_db = [];
+                for (var i = 0; i < no_records; i++) {
+                    var number = tickets[i].number;
+                    console.log(number);
+                    var sd = tickets[i].short_description;
+                    var priority = tickets[i].priority;
+                    var state = tickets[i].state;
+                    var opened = tickets[i].opened;
+                    var due_date = tickets[i].due_date;
+                    var closed = tickets[i].closed;
+                    
+                    ism_db.push({
+                        "id": number,
+                        "name": sd,
+                        "priority": priority,
+                        "state": state,
+                        "opened": opened,
+                        "due_date": due_date,
+                        "closed": closed
+                    })
                 }
+                
 
                 function dataProvider (request, callback) {
                 console.log("##REQUEST", request);
-                var data = db.slice(0);
+                var data = ism_db.slice(0);
                 if (request.order.length && request.order[0] && request.order[0].field == "id") {
                   data.sort(function(a, b) {
                     return request.order[0].sorting == "ASC" ? a.id - b.id
@@ -213,7 +223,7 @@ app.controller('ismCtrl', function($scope, $http) {
                 callback(response);
                 }
 
-                //console.log("Exiting table details....");
+                
             }
 
 
