@@ -1,0 +1,77 @@
+/*.ng-pristine
+{
+	margin-top: 150px;
+}*/
+
+.fc-header-toolbar
+{
+	background-color : #0063C3;
+	color : white; 
+}
+
+.fc-event-container
+{
+	color : white;
+}
+
+.fc-prev-button:hover
+{
+	background-color: white;
+}
+
+.fc-next-button:hover
+{
+	background-color: white;
+}
+
+#calendar
+{
+	font-family: Rubik, sans-serif;
+	margin-top: 150px;
+}
+
+.fc-today-button:hover
+{
+	background-color: white;
+}
+
+.fc-today-button
+{
+	background-color: black;
+}
+
+.modal-header
+{
+	background : #0063C3;
+
+}
+.modal-title
+{
+	background-color: #0063C3;
+	color: white;
+}
+
+h5
+{
+	color: black;
+}
+
+
+
+.fc th.fc-sat, .fc th.fc-sun, .fc th.fc-thu, .fc th.fc-tue {
+    background: #99ccff;
+    font-weight: bold;
+}
+
+.fc th.fc-mon,  .fc th.fc-wed, .fc th.fc-fri {
+    background: #b3d9ff;
+    font-weight: bold;
+}
+
+.fc-content 
+{
+	padding-top: 4px;
+	padding-bottom: 4px;
+}
+
+
