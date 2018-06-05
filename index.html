@@ -16,20 +16,25 @@
     <link rel="stylesheet" type="text/css" href="css/spinners.css">
     <link rel="stylesheet" type="text/css" href="css/style.css">
     <link rel="stylesheet" type="text/css" href="css/default.css"  id="theme">
+    <link rel="stylesheet" type="text/css" href="css/outages.css"
+
+    <!-- For Outages Page -->
+    <link rel = "stylesheet" href = "https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.min.css">
 </head>
 
 <body class="fix-header">
     <div id="wrapper">
         <nav class="navbar navbar-default navbar-static-top m-b-0" style="padding: 0">
-            <div class="navbar-header" style="background: #0063C3">
+            <div class="navbar-header" style="background: #0063C3;">
                 <div class="top-left-part" style="background: #0063C3">
                     <a class="logo" href="index.html">
                         <span class="hidden-xs">
-                       <img src="img/logo-amgen.png" alt="home" class="light-logo">
-                     </span> </a>
+                            <img src="img/logo-amgen.png" alt="home" class="light-logo">
+                        </span> 
+                    </a>
                 </div>
-                <div style="margin-top: 10px">
-                <a ui-sref="home" style="color: white;" class="offset-md-4"><b style="font-size: 24px;font-weight: 400;">CMD KTLO Operations</b></a>
+                <div style="margin-top: 10px ">
+                    <a ui-sref="home" style="color: white;" class="offset-md-4"><b style="font-size: 24px;font-weight: 400;">CMD KTLO Operations</b></a>
                 </div>
             </div>
         </nav>
@@ -53,7 +58,7 @@
                     </li>
 
                     <li>
-                        <a ui-sref="ism" ui-sref-active="active" class="waves-effect"><i class="<i class="fas fa-wrench"></i>" aria-hidden="true"></i>Outages</a>
+                        <a ui-sref="outages" ui-sref-active="active" class="waves-effect"><i class="fa fa-wrench fa-fw" aria-hidden="true"></i>Outages</a>
                     </li>                
                      
                 </ul>
@@ -76,7 +81,18 @@
 <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
 <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css"> -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <!--for table -->
 <!--  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.8/angular.min.js"></script> -->
 <script type="text/javascript" src="dist/angular.tableview.min.js"></script>
+
+<!-- For Outages Page -->
+<script type = "text/javascript" src = "https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.min.js"></script>
+<script type = "text/javascript" src = "https://cdnjs.cloudflare.com/ajax/libs/angular-ui-calendar/1.0.0/calendar.js"></script>
+<script data-require="ui-bootstrap@*" data-semver="0.13.0" src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.13.0.min.js"></script>
+<script type="text/javascript" src = "views/outages/outages_ctrl.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+
+
+

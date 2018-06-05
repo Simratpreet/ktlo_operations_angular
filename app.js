@@ -1,4 +1,4 @@
-var app = angular.module('ktloApp', ["ui.router", "tableview"]);
+var app = angular.module('ktloApp', ["ui.router", "tableview", "ui.calendar", "ui.bootstrap"]);
 
 
 app.config(function($stateProvider, $urlRouterProvider) {
@@ -12,6 +12,11 @@ app.config(function($stateProvider, $urlRouterProvider) {
     	url : "/load_logs",
         templateUrl : "views/load_logs/load_logs.html",
         controller : "load_logs_ctrl"
+    })
+    .state("outages", {
+        url : "/outages",
+        templateUrl : "views/outages/outages.html",
+        controller : "outages_ctrl"
     })
     .state("test_api", {
     	url : "/test_api",

@@ -1,0 +1,40 @@
+<div id = "calendar" class="container-fluid">  
+  <div ui-calendar = "uiConfig.calendar" ng-model = "eventSources"></div>
+
+      <div class="modal fade" id="myModal">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+          
+            <!-- Modal Header -->
+            <div class="modal-header">
+              <h4 class="modal-title"><b>Outage Details</b></h4>
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            
+            <!-- Modal body -->
+            <div class="modal-body">
+              <h5><b>Type :  </b> <span ng-bind = "outage_type"> </h5>
+              <hr>
+              <h5> <b>Description : </b> <span ng-bind = "outage_description"> </h5>
+              <hr>
+              <h5> <b>Start Date : </b> <span ng-bind = "outage_start"> </h5>
+              <hr>
+              <h5> <b>End Date : </b> <span ng-bind = "outage_end"> </h5>
+              <hr>
+              <h5> <b>Impacted Staff : </b> <span ng-bind = "outage_staff"> </h5>
+              <hr>
+              <h5> <b>Environment : </b> <span ng-bind = "outage_env"></h5>
+              <hr>
+              <h5> <b>Contact : </b> <span ng-bind = "outage_contact"> </h5>
+            </div>
+            
+            <!-- Modal footer -->
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+            
+          </div>
+        </div>
+      </div>
+</div>
+
