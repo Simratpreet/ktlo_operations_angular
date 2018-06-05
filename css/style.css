@@ -1749,6 +1749,7 @@ table.dataTable thead .sorting:after {
     background: #fff;
     padding: 25px;
     margin-bottom: 30px
+
 }
 
 .white-box .box-title {
@@ -1758,6 +1759,42 @@ table.dataTable thead .sorting:after {
     font-size: 16px
 }
 
+.info-box {
+    display: block;
+    min-height: 90px;
+    background: #fff;
+    width: 100%;
+    box-shadow: 0 1px 1px rgba(0,0,0,0.1);
+    border-radius: 2px;
+    margin-bottom: 15px;
+
+
+
+}
+
+.info-box-icon {
+    border-top-left-radius: 2px;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 2px;
+    display: block;
+    float: left;
+    height: 90px;
+    width: 90px;
+    text-align: center;
+    font-size: 45px;
+    line-height: 90px;
+    background: rgba(0,0,0,0.2);
+}
+
+.bg-aqua{
+    background-color: #00c0ef !important;
+}
+
+.info-box-content {
+    padding: 5px 10px;
+    margin-left: 90px;
+}
 .panel {
     border-radius: 0;
     margin-bottom: 30px;
@@ -1772,6 +1809,19 @@ table.dataTable thead .sorting:after {
     padding: 20px 25px
 }
 
+.info-box-text {
+    display: block;
+    font-size: 18px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.info-box-number {
+    display: block;
+    font-weight: bold;
+    font-size: 18px;
+}
 .panel .panel-heading .panel-title {
     font-size: 16px;
     color: #263238
@@ -1811,6 +1861,8 @@ table.dataTable thead .sorting:after {
     border-radius: 0;
     padding: 20px 25px
 }
+
+
 
 .panel-green,
 .panel-success {

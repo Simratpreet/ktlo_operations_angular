@@ -13,6 +13,11 @@ app.config(function($stateProvider, $urlRouterProvider) {
         templateUrl : "views/load_logs/load_logs.html",
         controller : "load_logs_ctrl"
     })
+    .state("ism", {
+        url : "/ism",
+        templateUrl : "views/ism/ism.html",
+        controller : "ismCtrl"
+    })
     .state("test_api", {
     	url : "/test_api",
         templateUrl : "views/test_api/test_api.html",

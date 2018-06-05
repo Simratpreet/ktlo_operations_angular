@@ -102,7 +102,7 @@ app.controller('load_logs_ctrl', function($scope, $http) {
                             filterable: true,
                             placeholder: "Filter by Status"
                         },
-                        { field: "sdate", title: "Start Time", sortable: true },
+                        { field: "sdate", title: "Start Time", sortable: true},
                         { field: "edate", title: "End Time", sortable: true },
                         { field: "duration", title: "Duration (in mins)", sortable: true }
                     ],
