@@ -63,6 +63,7 @@ app.controller('load_logs_ctrl', function($scope, $http) {
             var detaildata = function() {
                 $scope.global = true;
                 tableJson = $scope.tabledata;
+
                 var request = {
                     limit: 10,
                     page: 1,
@@ -133,8 +134,11 @@ app.controller('load_logs_ctrl', function($scope, $http) {
                     var sdate = tableJson[i].start_ts;
                     var edate = tableJson[i].end_ts;
                     var duration = tableJson[i].duration;
+
+                    //var duration_str = duration.toString();
                     //console.log("Name : " + name);
                     //console.log("date : " + date);
+                    //console.log("duration : " + duration);
                     db.push({
                         "id": date,
                         "name": status,

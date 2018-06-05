@@ -1,7 +1,7 @@
-.ng-pristine
+/*.ng-pristine
 {
 	margin-top: 150px;
-}
+}*/
 
 .fc-header-toolbar
 {
@@ -27,6 +27,7 @@
 #calendar
 {
 	font-family: Rubik, sans-serif;
+	margin-top: 150px;
 }
 
 .fc-today-button:hover
@@ -41,11 +42,12 @@
 
 .modal-header
 {
-	background-color: #0063C3;
+	background : #0063C3;
+
 }
 .modal-title
 {
-	/*background-color: #0063C3;*/
+	background-color: #0063C3;
 	color: white;
 }
 
@@ -54,15 +56,7 @@ h5
 	color: black;
 }
 
-/*.fc-sun, .fc-tue, .fc-thu, .fc-sat
-{
-	background-color: #80bfff;
-}
 
-.fc-mon, .fc-wed, .fc-fri
-{
-	background-color: #b3d9ff;
-}*/
 
 .fc th.fc-sat, .fc th.fc-sun, .fc th.fc-thu, .fc th.fc-tue {
     background: #99ccff;
@@ -77,6 +71,7 @@ h5
 .fc-content 
 {
 	padding-top: 4px;
+	padding-bottom: 4px;
 }
 
 

@@ -1,4 +1,4 @@
-var app = angular.module('ktloApp', ["ui.router", "tableview", "ui.calendar", "ui.bootstrap"]);
+var app = angular.module('ktloApp', ["ui.router", "tableview", "ui.calendar"]);
 
 
 app.config(function($stateProvider, $urlRouterProvider) {
