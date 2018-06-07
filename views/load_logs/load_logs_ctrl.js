@@ -135,6 +135,9 @@ app.controller('load_logs_ctrl', function($scope, $http) {
                     var edate = tableJson[i].end_ts;
                     var duration = tableJson[i].duration;
 
+                    var duration_str = duration.toString();
+                    duration = parseFloat(duration_str).toFixed(2);
+
                     //var duration_str = duration.toString();
                     //console.log("Name : " + name);
                     //console.log("date : " + date);

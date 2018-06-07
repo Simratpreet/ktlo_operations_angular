@@ -55,7 +55,36 @@ app.controller('ismCtrl', function($scope, $http) {
                     $scope.inc = $scope.data_received.incidents;
                     $scope.sr = $scope.data_received.service_request;
                     $scope.cr = $scope.data_received.change_request;
+
                     //console.log("responsejson.data : " + JSON.stringify($scope.data_received));
+                    $scope.inc_assign = $scope.data_received.detailed_count_inc.assign;
+                    $scope.inc_complete = $scope.data_received.detailed_count_inc.complete;
+                    $scope.inc_close = $scope.data_received.detailed_count_inc.close;
+                    $scope.inc_cancel = $scope.data_received.detailed_count_inc.cancel;
+                    $scope.inc_progress = $scope.data_received.detailed_count_inc.progress;
+                    $scope.inc_new = $scope.data_received.detailed_count_inc.new;
+                    $scope.inc_open = $scope.data_received.detailed_count_inc.open;
+
+                    $scope.sr_assign = $scope.data_received.detailed_count_sr.assign;
+                    $scope.sr_complete = $scope.data_received.detailed_count_sr.complete;
+                    $scope.sr_close = $scope.data_received.detailed_count_sr.close;
+                    $scope.sr_cancel = $scope.data_received.detailed_count_sr.cancel;
+                    $scope.sr_progress = $scope.data_received.detailed_count_sr.progress;
+                    $scope.sr_new = $scope.data_received.detailed_count_sr.new;
+                    $scope.sr_open = $scope.data_received.detailed_count_sr.open;
+
+                    $scope.cr_assign = $scope.data_received.detailed_count_cr.assign;
+                    $scope.cr_complete = $scope.data_received.detailed_count_cr.complete;
+                    $scope.cr_close = $scope.data_received.detailed_count_cr.close;
+                    $scope.cr_cancel = $scope.data_received.detailed_count_cr.cancel;
+                    $scope.cr_progress = $scope.data_received.detailed_count_cr.progress;
+                    $scope.cr_new = $scope.data_received.detailed_count_cr.new;
+                    $scope.cr_open = $scope.data_received.detailed_count_cr.open;
+
+                    $scope.inc_sla_yes = $scope.data_received.detailed_count_sla.inc_sla_yes;
+                    $scope.inc_sla_no = $scope.data_received.detailed_count_sla.inc_sla_no;
+                    $scope.sr_sla_yes = $scope.data_received.detailed_count_sla.sr_sla_yes;
+                    $scope.sr_sla_no = $scope.data_received.detailed_count_sla.sr_sla_no;
 
                     c3chart();
                     detaildata();
@@ -76,9 +105,8 @@ app.controller('ismCtrl', function($scope, $http) {
                 data: {
                     // iris data from R
                     columns: [
-                        ['INC', $scope.inc],
-                        ['SR', $scope.sr],
-                        ['CR', $scope.cr]
+                        ['INC SLA MET', $scope.inc_sla_yes],
+                        ['INC SLA NOT MET', $scope.inc_sla_no]
                     ],
                     type : 'pie',
                     
@@ -93,9 +121,8 @@ app.controller('ismCtrl', function($scope, $http) {
                 data: {
                     // iris data from R
                     columns: [
-                        ['INC', $scope.inc],
-                        ['SR', $scope.sr],
-                        ['CR', $scope.cr]
+                        ['SR SLA MET', $scope.sr_sla_yes],
+                        ['SR SLA NOT MET', $scope.sr_sla_no]
                     ],
                     type : 'pie',
                     onclick: function (d, i) { console.log("onclick", d, i); },
@@ -152,7 +179,8 @@ app.controller('ismCtrl', function($scope, $http) {
                   {field:"state", title:"State", sortable:true},
                   {field:"opened", title:"Opened", sortable:true},
                   {field:"due_date", title:"Due Date", sortable:true},
-                  {field:"closed", title:"Closed", sortable:true}
+                  {field:"closed", title:"Closed", sortable:true},
+                  {field:"sla", title:"SLA", sortable:true}
                 ],
                 provider: dataProvider,
                 request: request,
@@ -186,6 +214,7 @@ app.controller('ismCtrl', function($scope, $http) {
                     var opened = tickets[i].opened;
                     var due_date = tickets[i].due_date;
                     var closed = tickets[i].closed;
+                    var sla = tickets[i].sla;
                     
                     ism_db.push({
                         "id": number,
@@ -195,7 +224,8 @@ app.controller('ismCtrl', function($scope, $http) {
                         "state": state,
                         "opened": opened,
                         "due_date": due_date,
-                        "closed": closed
+                        "closed": closed, 
+                        "sla" : sla
                     })
                 }
                 
@@ -282,19 +312,19 @@ app.controller('ismCtrl', function($scope, $http) {
 
         $('#incTable').click(function(){
             console.log("Inside click function..");
-            $('#myModal').modal('show');
+            $('#myModalInc').modal('show');
     
         });
 
         $('#srTable').click(function(){
             console.log("Inside click function..");
-            $('#myModal').modal('show');
+            $('#myModalSr').modal('show');
     
         });
 
         $('#crTable').click(function(){
             console.log("Inside click function..");
-            $('#myModal').modal('show');
+            $('#myModalCr').modal('show');
     
         });
             

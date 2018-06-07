@@ -102,7 +102,7 @@ main {
     </div>
     </div>
 
-     <div class="modal fade" id="myModal">
+     <div class="modal fade" id="myModalInc">
         <div class="modal-dialog modal-dialog-centered">
           <div class="modal-content">
           
@@ -114,19 +114,93 @@ main {
             
             <!-- Modal body -->
             <div class="modal-body">
-              <h5><b>Assigned : </b> <span ng-bind = "outage_type"> </h5>
+              <h5><b>Assigned : </b> <span ng-bind = "inc_assign"> </h5>
               <hr>
-              <h5> <b>Cancelled : </b> <span ng-bind = "outage_description"> </h5>
+              <h5> <b>Cancelled : </b> <span ng-bind = "inc_cancel"> </h5>
               <hr>
-              <h5> <b>Closed : </b> <span ng-bind = "outage_start"> </h5>
+              <h5> <b>Closed : </b> <span ng-bind = "inc_close"> </h5>
               <hr>
-              <h5> <b>Completed : </b> <span ng-bind = "outage_end"> </h5>
+              <h5> <b>Completed : </b> <span ng-bind = "inc_complete"> </h5>
               <hr>
-              <h5> <b>In Progress : </b> <span ng-bind = "outage_staff"> </h5>
+              <h5> <b>In Progress : </b> <span ng-bind = "inc_progress"> </h5>
               <hr>
-              <h5> <b>New : </b> <span ng-bind = "outage_env"></h5>
+              <h5> <b>New : </b> <span ng-bind = "inc_new"></h5>
               <hr>
-              <h5> <b>Open : </b> <span ng-bind = "outage_contact"> </h5>
+              <h5> <b>Open : </b> <span ng-bind = "inc_open"> </h5>
+              
+            </div>
+            
+            <!-- Modal footer -->
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+            
+          </div>
+        </div>
+      </div>
+
+      <div class="modal fade" id="myModalSr">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+          
+            <!-- Modal Header -->
+            <div class="modal-header rounded-0">
+              <h4 class="modal-title"><b>Details</b></h4>
+              <!-- <button type="button" class="close" data-dismiss="modal">&times;</button> -->
+            </div>
+            
+            <!-- Modal body -->
+            <div class="modal-body">
+              <h5><b>Assigned : </b> <span ng-bind = "sr_assign"> </h5>
+              <hr>
+              <h5> <b>Cancelled : </b> <span ng-bind = "sr_cancel"> </h5>
+              <hr>
+              <h5> <b>Closed : </b> <span ng-bind = "sr_close"> </h5>
+              <hr>
+              <h5> <b>Completed : </b> <span ng-bind = "sr_complete"> </h5>
+              <hr>
+              <h5> <b>In Progress : </b> <span ng-bind = "sr_progress"> </h5>
+              <hr>
+              <h5> <b>New : </b> <span ng-bind = "sr_new"></h5>
+              <hr>
+              <h5> <b>Open : </b> <span ng-bind = "sr_open"> </h5>
+              
+            </div>
+            
+            <!-- Modal footer -->
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+            
+          </div>
+        </div>
+      </div>
+
+      <div class="modal fade" id="myModalCr">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+          
+            <!-- Modal Header -->
+            <div class="modal-header rounded-0">
+              <h4 class="modal-title"><b>Details</b></h4>
+              <!-- <button type="button" class="close" data-dismiss="modal">&times;</button> -->
+            </div>
+            
+            <!-- Modal body -->
+            <div class="modal-body">
+              <h5><b>Assigned : </b> <span ng-bind = "cr_assign"> </h5>
+              <hr>
+              <h5> <b>Cancelled : </b> <span ng-bind = "cr_cancel"> </h5>
+              <hr>
+              <h5> <b>Closed : </b> <span ng-bind = "cr_close"> </h5>
+              <hr>
+              <h5> <b>Completed : </b> <span ng-bind = "cr_complete"> </h5>
+              <hr>
+              <h5> <b>In Progress : </b> <span ng-bind = "cr_progress"> </h5>
+              <hr>
+              <h5> <b>New : </b> <span ng-bind = "cr_new"></h5>
+              <hr>
+              <h5> <b>Open : </b> <span ng-bind = "cr_open"> </h5>
               
             </div>
             

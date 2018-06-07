@@ -35,7 +35,9 @@ app.controller('outages_ctrl', function($scope, $compile, uiCalendarConfig, $htt
 	                	var type = outages_data[i].type;
 	                	var id = outages_data[i].outage_id;
                     var sd = outages_data[i].title;
+                    //console.log("sd : " + sd);
 	                	$scope.addEvent(start_date, end_date, type, id, sd);
+                    //$scope.addEvent(start_date, end_date, type, id);
 	                }
 
 	               	length = $scope.events.length;
@@ -105,10 +107,11 @@ app.controller('outages_ctrl', function($scope, $compile, uiCalendarConfig, $htt
         /*console.log("Title : " + date.title);
         console.log("Start : " + date.start);
         console.log("id : " + date.id);*/
-
+        title = date.title;
+        type = title.substr(0,title.indexOf(' '));
         var get_data = {};
-
-        get_data.type = date.title;
+        console.log("type : " + type);
+        get_data.type = type;
         get_data.id = date.id;
 
         console.log(JSON.stringify(get_data));
@@ -170,6 +173,7 @@ app.controller('outages_ctrl', function($scope, $compile, uiCalendarConfig, $htt
     	console.log("type : " + type);
     	console.log("id : " + id);
       var temp = type + " : " + sd;
+      console.log("temp : " + temp);
       $scope.events.push({
         title : temp,
         start : start_date,
