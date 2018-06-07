@@ -45,18 +45,18 @@ main {
         </div>
         <div class="white-box" style="height: 150px">
             <div class="row">
-            <div class="col-md-4 col-sm-6 col-xs-12"> 
+            <div class="col-md-4 col-sm-6 col-xs-12" style="cursor: pointer" id="incTable"> 
                 <div class="info-box">
                     <span class="info-box-icon bg-aqua">
                         <i class="fa fa-envelope-o"></i>
                     </span>
-                    <div class="info-box-content">
+                    <div class="info-box-content" >
                         <span class="info-box-text">Incidents</span>
                         <span class="info-box-number"  ng-bind="inc"></span>
                     </div>
                 </div>
             </div>
-            <div class="col-md-4 col-sm-6 col-xs-12"> 
+            <div class="col-md-4 col-sm-6 col-xs-12" style="cursor: pointer" id="srTable"> 
                 <div class="info-box">
                     <span class="info-box-icon bg-aqua">
                         <i class="fa fa-envelope-o"></i>
@@ -67,7 +67,7 @@ main {
                     </div>
                 </div>
             </div>
-            <div class="col-md-4 col-sm-6 col-xs-12"> 
+            <div class="col-md-4 col-sm-6 col-xs-12" style="cursor: pointer" id="crTable"> 
                 <div class="info-box">
                     <span class="info-box-icon bg-aqua">
                         <i class="fa fa-envelope-o"></i>
@@ -82,16 +82,60 @@ main {
         </div>
         <div class="white-box">
         <div class="row">
-        <div class="col-md-3" >
-            <h3 class="box-title">Pie Chart </h3>
-            <div id="chart"></div>
+        <div class="col-md-5" >
+            <h3 class="box-title">Incidents </h3>
+            <div id="chart1"></div>
         </div>
-        <div class="col-md-9" >
-            <h3 class="box-title">Table</h3>
-            <div tableview="tableviewOptions" tableview-theme="'material'" ng-if="global"></div>
+        <div class="col-md-5" >
+            <h3 class="box-title">Service Request</h3>
+            <div id="chart2"></div>
         </div>
+        
         </div>
 
     </div>
+    <div class="white-box">
+        <div  >
+            <h3 class="box-title">Request Details</h3>
+            <div tableview="tableviewOptions" tableview-theme="'material'" ng-if="global"></div>
+        </div>
     </div>
+    </div>
+
+     <div class="modal fade" id="myModal">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+          
+            <!-- Modal Header -->
+            <div class="modal-header rounded-0">
+              <h4 class="modal-title"><b>Details</b></h4>
+              <!-- <button type="button" class="close" data-dismiss="modal">&times;</button> -->
+            </div>
+            
+            <!-- Modal body -->
+            <div class="modal-body">
+              <h5><b>Assigned : </b> <span ng-bind = "outage_type"> </h5>
+              <hr>
+              <h5> <b>Cancelled : </b> <span ng-bind = "outage_description"> </h5>
+              <hr>
+              <h5> <b>Closed : </b> <span ng-bind = "outage_start"> </h5>
+              <hr>
+              <h5> <b>Completed : </b> <span ng-bind = "outage_end"> </h5>
+              <hr>
+              <h5> <b>In Progress : </b> <span ng-bind = "outage_staff"> </h5>
+              <hr>
+              <h5> <b>New : </b> <span ng-bind = "outage_env"></h5>
+              <hr>
+              <h5> <b>Open : </b> <span ng-bind = "outage_contact"> </h5>
+              
+            </div>
+            
+            <!-- Modal footer -->
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+            
+          </div>
+        </div>
+      </div>
 </main>

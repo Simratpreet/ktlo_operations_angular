@@ -34,7 +34,8 @@ app.controller('outages_ctrl', function($scope, $compile, uiCalendarConfig, $htt
 	                	var end_date = outages_data[i].end_date;
 	                	var type = outages_data[i].type;
 	                	var id = outages_data[i].outage_id;
-	                	$scope.addEvent(start_date, end_date, type, id);
+                    var sd = outages_data[i].title;
+	                	$scope.addEvent(start_date, end_date, type, id, sd);
 	                }
 
 	               	length = $scope.events.length;
@@ -162,14 +163,15 @@ app.controller('outages_ctrl', function($scope, $compile, uiCalendarConfig, $htt
       }
     };
     /* add custom event*/
-    $scope.addEvent = function(start_date, end_date, type, id) {
+    $scope.addEvent = function(start_date, end_date, type, id, sd) {
     	console.log("addEvent called...");
     	console.log("start_date : " + start_date);
     	console.log("end_date : " + end_date);
     	console.log("type : " + type);
     	console.log("id : " + id);
+      var temp = type + " : " + sd;
       $scope.events.push({
-        title : type,
+        title : temp,
         start : start_date,
         end : end_date, 
         id : id
