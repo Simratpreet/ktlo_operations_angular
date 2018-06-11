@@ -22,6 +22,17 @@
     padding: 2px;
 }
 
+#incCount, #srCount, #crCount
+{
+    font-size: 35px;
+}
+
+#inc_pie, #sr_pie
+{
+    text-align: center;
+}
+
+
 
 main {
     margin: 15px 0 70px;
@@ -52,7 +63,7 @@ main {
                     </span>
                     <div class="info-box-content" >
                         <span class="info-box-text">Incidents</span>
-                        <span class="info-box-number"  ng-bind="inc"></span>
+                        <span class="info-box-number"  ng-bind="inc" id="incCount"></span>
                     </div>
                 </div>
             </div>
@@ -63,7 +74,7 @@ main {
                     </span>
                     <div class="info-box-content">
                         <span class="info-box-text">Service Requests</span>
-                        <span class="info-box-number" ng-bind="sr"></span>
+                        <span class="info-box-number" ng-bind="sr" id="srCount"></span>
                     </div>
                 </div>
             </div>
@@ -74,7 +85,7 @@ main {
                     </span>
                     <div class="info-box-content">
                         <span class="info-box-text">Change Requests</span>
-                        <span class="info-box-number" ng-bind="cr"></span>
+                        <span class="info-box-number" ng-bind="cr" id="crCount"></span>
                     </div>
                 </div>
             </div>
@@ -82,12 +93,12 @@ main {
         </div>
         <div class="white-box">
         <div class="row">
-        <div class="col-md-5" >
-            <h3 class="box-title">Incidents </h3>
+        <div class="col-md-5" id="inc_pie">
+            <h3 class="box-title">Incidents SLA Adherence</h3>
             <div id="chart1"></div>
         </div>
-        <div class="col-md-5" >
-            <h3 class="box-title">Service Request</h3>
+        <div class="col-md-5" id="sr_pie">
+            <h3 class="box-title">Service Requests SLA Adherence</h3>
             <div id="chart2"></div>
         </div>
         

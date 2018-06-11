@@ -136,7 +136,7 @@ app.controller('load_logs_ctrl', function($scope, $http) {
                     var duration = tableJson[i].duration;
 
                     var duration_str = duration.toString();
-                    duration = parseFloat(duration_str).toFixed(2);
+                    duration = parseFloat(duration_str).toFixed(1);
 
                     //var duration_str = duration.toString();
                     //console.log("Name : " + name);
@@ -292,7 +292,7 @@ app.controller('load_logs_ctrl', function($scope, $http) {
                         },
                         legend: {
                             show: true,
-                            position: 'inset'
+                            position: 'bottom'
                            
                         },
 
