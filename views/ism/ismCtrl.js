@@ -21,7 +21,7 @@ app.controller('ismCtrl', function($scope, $http) {
 
             $('input[name="daterange"]').daterangepicker({
                 opens: 'left',
-                minDate: new Date('2018-03-23'),
+                minDate: new Date('2018-03-20'),
                 maxDate: dateYesterday,
                 startDate: start_date,
                 endDate: dateYesterday
@@ -44,7 +44,7 @@ app.controller('ismCtrl', function($scope, $http) {
                 console.log("get_data : " + JSON.stringify(get_data));
                 $http({
                     method: 'GET',
-                    url: 'http://10.204.43.206:5012/ism_tickets', 
+                    url: 'http://10.204.43.206:5012/ism_source', 
                     params: get_data
                 }).then(function successCallback(responsejson) {
                     /*$scope.data_json = responsejson.data.load_logs_data;
@@ -180,7 +180,7 @@ app.controller('ismCtrl', function($scope, $http) {
                   {field:"opened", title:"Opened", sortable:true},
                   {field:"due_date", title:"Due Date", sortable:true},
                   {field:"closed", title:"Closed", sortable:true},
-                  {field:"sla", title:"SLA", sortable:true}
+                  {field:"sla", title:"SLA"}
                 ],
                 provider: dataProvider,
                 request: request,
@@ -206,15 +206,15 @@ app.controller('ismCtrl', function($scope, $http) {
                 tickets = $scope.data_received.ticket_details;
                 var ism_db = [];
                 for (var i = 0; i < no_records; i++) {
-                    var number = tickets[i].number;
-                    var type = tickets[i].type;
-                    var sd = tickets[i].short_description;
-                    var priority = tickets[i].priority;
-                    var state = tickets[i].state;
-                    var opened = tickets[i].opened;
-                    var due_date = tickets[i].due_date;
-                    var closed = tickets[i].closed;
-                    var sla = tickets[i].sla;
+                    var number = tickets[i].NUMBER_;
+                    var type = tickets[i].TYPE;
+                    var sd = tickets[i].SHORT_DESCRIPTION;
+                    var priority = tickets[i].PRIORITY;
+                    var state = tickets[i].STATE;
+                    var opened = tickets[i].OPENED_DATE;
+                    var due_date = tickets[i].DUE_DATE;
+                    var closed = tickets[i].CLOSED_DATE;
+                    var sla = tickets[i].SLA;
                     
                     ism_db.push({
                         "id": number,
@@ -243,7 +243,15 @@ app.controller('ismCtrl', function($scope, $http) {
                     ;
                   });
                 }
-                else if (request.order.length && request.order[0] && ["priority"].indexOf(request.order[0].field) >= 0) {
+                else if (request.order.length && request.order[0] && request.order[0].field == "priority") {
+                        data.sort(function(a, b) {
+                            return request.order[0].sorting == "ASC" ? a.priority - b.priority :
+                                request.order[0].sorting == "DESC" ? b.priority - a.priority :
+                                0;
+                        });
+                }
+
+                else if (request.order.length && request.order[0] && ["state"].indexOf(request.order[0].field) >= 0) {
                   data.sort(function(a, b) {
                     var A = (request.order[0].sorting == "ASC" ? a[request.order[0].field] : b[request.order[0].field]).toLowerCase();
                     var B = (request.order[0].sorting == "ASC" ? b[request.order[0].field] : a[request.order[0].field]).toLowerCase();
