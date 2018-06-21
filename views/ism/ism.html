@@ -22,7 +22,7 @@
     padding: 2px;
 }
 
-#incCount, #srCount, #crCount
+#incCount, #srCount, #crCount, #slaCount
 {
     font-size: 35px;
 }
@@ -56,10 +56,10 @@ main {
         </div>
         <div class="white-box" style="height: 150px">
             <div class="row">
-            <div class="col-md-4 col-sm-6 col-xs-12" style="cursor: pointer" id="incTable"> 
+            <div class="col-md-3 col-sm-6 col-xs-12" style="cursor: pointer" id="incTable"> 
                 <div class="info-box">
                     <span class="info-box-icon bg-aqua">
-                        <i class="fa fa-envelope-o"></i>
+                        <i class="fa fa-edit"></i>
                     </span>
                     <div class="info-box-content" >
                         <span class="info-box-text">Incidents</span>
@@ -67,10 +67,10 @@ main {
                     </div>
                 </div>
             </div>
-            <div class="col-md-4 col-sm-6 col-xs-12" style="cursor: pointer" id="srTable"> 
+            <div class="col-md-3 col-sm-6 col-xs-12" style="cursor: pointer" id="srTable"> 
                 <div class="info-box">
                     <span class="info-box-icon bg-aqua">
-                        <i class="fa fa-envelope-o"></i>
+                        <i class="fa fa-edit"></i>
                     </span>
                     <div class="info-box-content">
                         <span class="info-box-text">Service Requests</span>
@@ -78,14 +78,25 @@ main {
                     </div>
                 </div>
             </div>
-            <div class="col-md-4 col-sm-6 col-xs-12" style="cursor: pointer" id="crTable"> 
+            <div class="col-md-3 col-sm-6 col-xs-12" style="cursor: pointer" id="crTable"> 
                 <div class="info-box">
                     <span class="info-box-icon bg-aqua">
-                        <i class="fa fa-envelope-o"></i>
+                        <i class="fa fa-edit"></i>
                     </span>
                     <div class="info-box-content">
                         <span class="info-box-text">Change Requests</span>
                         <span class="info-box-number" ng-bind="cr" id="crCount"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-6 col-xs-12" style="cursor: pointer" id="slaTable"> 
+                <div class="info-box">
+                    <span class="info-box-icon bg-aqua">
+                        <i class="fa fa-exclamation-triangle"></i>
+                    </span>
+                    <div class="info-box-content" >
+                        <span class="info-box-text">SLA Breaches</span>
+                        <span class="info-box-number"  ng-bind="total_sla_breaches" id="slaCount"></span>
                     </div>
                 </div>
             </div>
@@ -213,6 +224,32 @@ main {
               <hr>
               <h5> <b>Open : </b> <span ng-bind = "cr_open"> </h5>
               
+            </div>
+            
+            <!-- Modal footer -->
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+            
+          </div>
+        </div>
+      </div>
+
+      <div class="modal fade" id="myModalSlaBreaches">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+          
+            <!-- Modal Header -->
+            <div class="modal-header rounded-0">
+              <h4 class="modal-title"><b>Details</b></h4>
+              <!-- <button type="button" class="close" data-dismiss="modal">&times;</button> -->
+            </div>
+            
+            <!-- Modal body -->
+            <div class="modal-body">
+              <h5><b>INC SLA Breaches : </b> <span ng-bind = "inc_sla_no"> </h5>
+              <hr>
+              <h5> <b>SR SLA Breaches : </b> <span ng-bind = "sr_sla_no"> </h5>
             </div>
             
             <!-- Modal footer -->

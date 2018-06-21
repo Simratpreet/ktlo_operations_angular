@@ -86,6 +86,8 @@ app.controller('ismCtrl', function($scope, $http) {
                     $scope.sr_sla_yes = $scope.data_received.detailed_count_sla.sr_sla_yes;
                     $scope.sr_sla_no = $scope.data_received.detailed_count_sla.sr_sla_no;
 
+                    $scope.total_sla_breaches = parseInt($scope.inc_sla_no) + parseInt($scope.sr_sla_no);
+
                     c3chart();
                     detaildata();
 
@@ -109,6 +111,10 @@ app.controller('ismCtrl', function($scope, $http) {
                         ['INC SLA NOT MET', $scope.inc_sla_no]
                     ],
                     type : 'pie',
+                    colors : {
+                        'INC SLA MET' : '#0063C3',
+                        'INC SLA NOT MET' : '#FF7F0E'
+                    },
                     
                     onclick: function (d, i) { console.log("onclick", d, i); },
                     onmouseover: function (d, i) { console.log("onmouseover", d, i); },
@@ -125,6 +131,10 @@ app.controller('ismCtrl', function($scope, $http) {
                         ['SR SLA NOT MET', $scope.sr_sla_no]
                     ],
                     type : 'pie',
+                    colors : {
+                        'SR SLA MET' : '#0063C3',
+                        'SR SLA NOT MET' : '#FF7F0E'
+                    },
                     onclick: function (d, i) { console.log("onclick", d, i); },
                     onmouseover: function (d, i) { console.log("onmouseover", d, i); },
                     onmouseout: function (d, i) { console.log("onmouseout", d, i); }
@@ -180,7 +190,7 @@ app.controller('ismCtrl', function($scope, $http) {
                   {field:"opened", title:"Opened", sortable:true},
                   {field:"due_date", title:"Due Date", sortable:true},
                   {field:"closed", title:"Closed", sortable:true},
-                  {field:"sla", title:"SLA"}
+                  {field:"sla", title:"SLA Adherence"}
                 ],
                 provider: dataProvider,
                 request: request,
@@ -317,7 +327,6 @@ app.controller('ismCtrl', function($scope, $http) {
                 
         }
 
-
         $('#incTable').click(function(){
             console.log("Inside click function..");
             $('#myModalInc').modal('show');
@@ -333,6 +342,12 @@ app.controller('ismCtrl', function($scope, $http) {
         $('#crTable').click(function(){
             console.log("Inside click function..");
             $('#myModalCr').modal('show');
+    
+        });
+
+        $('#slaTable').click(function(){
+            console.log("Inside click function..");
+            $('#myModalSlaBreaches').modal('show');
     
         });
             

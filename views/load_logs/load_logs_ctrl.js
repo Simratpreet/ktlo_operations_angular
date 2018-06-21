@@ -53,6 +53,7 @@ app.controller('load_logs_ctrl', function($scope, $http) {
 
                     c3chart();
                     detaildata();
+                    
 
                 }, function errorCallback(responseValue) {
                     console.log("error");
@@ -284,8 +285,9 @@ app.controller('load_logs_ctrl', function($scope, $http) {
                                 format: {
                                      
                                     value: function(value, ratio, id) {
-                                        
-                                        return value + " mins";
+                                        var duration_str = value.toString();
+                                        duration = parseFloat(duration_str).toFixed(1);
+                                        return duration + " mins";
                                     }
                                     
                                 }
@@ -337,6 +339,8 @@ app.controller('load_logs_ctrl', function($scope, $http) {
                             ['data1', 'data2']
                         ])
                     }, 3000);
+
+                   
                 }
 
                 onload();
