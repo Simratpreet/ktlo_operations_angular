@@ -22,9 +22,9 @@ app.controller('ismCtrl', function($scope, $http) {
             $('input[name="daterange"]').daterangepicker({
                 opens: 'left',
                 minDate: new Date('2018-03-20'),
-                maxDate: dateYesterday,
+                maxDate: dateToday,
                 startDate: start_date,
-                endDate: dateYesterday
+                endDate: dateToday
 
                 //maxDate : 
             }, function(start, end, label) {

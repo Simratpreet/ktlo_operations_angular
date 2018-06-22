@@ -293,9 +293,16 @@ app.controller('load_logs_ctrl', function($scope, $http) {
                                 }
                         },
                         legend: {
-                            show: true,
-                            position: 'bottom'
-                           
+                            position: 'inset',
+                            inset: {
+                                anchor: 'top-left',
+                                x: 20,
+                                y: -40,
+                                step: 1
+                            }
+                        },
+                        padding: {
+                            top: 40
                         },
 
                         grid: {
@@ -304,7 +311,14 @@ app.controller('load_logs_ctrl', function($scope, $http) {
                             },
                             y: {
                                 show: true
+                            },
+
+                            focus: {
+                                show: false
                             }
+
+
+
                         },
 
                         axis: {
@@ -331,6 +345,8 @@ app.controller('load_logs_ctrl', function($scope, $http) {
                                 }
                             }
                         }
+
+
                     });
 
 
