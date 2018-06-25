@@ -346,3 +346,4 @@ app.controller('load_logs_ctrl', function($scope, $http) {
                 onload();
 
             });
+
