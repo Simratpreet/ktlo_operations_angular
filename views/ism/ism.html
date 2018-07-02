@@ -32,7 +32,10 @@
     text-align: center;
 }
 
-
+.applyBtn 
+{
+    background: #0063C3;
+}
 
 main {
     margin: 15px 0 70px;
@@ -58,7 +61,7 @@ main {
             <div class="row">
             <div class="col-md-3 col-sm-6 col-xs-12" style="cursor: pointer" id="incTable"> 
                 <div class="info-box">
-                    <span class="info-box-icon bg-aqua">
+                    <span class="info-box-icon" style="background-color : white; color: #0063C3">
                         <i class="fa fa-edit"></i>
                     </span>
                     <div class="info-box-content" >
@@ -69,7 +72,7 @@ main {
             </div>
             <div class="col-md-3 col-sm-6 col-xs-12" style="cursor: pointer" id="srTable"> 
                 <div class="info-box">
-                    <span class="info-box-icon bg-aqua">
+                    <span class="info-box-icon" style="background-color : white; color: #0063C3">
                         <i class="fa fa-edit"></i>
                     </span>
                     <div class="info-box-content">
@@ -80,7 +83,7 @@ main {
             </div>
             <div class="col-md-3 col-sm-6 col-xs-12" style="cursor: pointer" id="crTable"> 
                 <div class="info-box">
-                    <span class="info-box-icon bg-aqua">
+                    <span class="info-box-icon" style="background-color : white; color: #0063C3">
                         <i class="fa fa-edit"></i>
                     </span>
                     <div class="info-box-content">
@@ -91,7 +94,7 @@ main {
             </div>
             <div class="col-md-3 col-sm-6 col-xs-12" style="cursor: pointer" id="slaTable"> 
                 <div class="info-box">
-                    <span class="info-box-icon bg-aqua">
+                    <span class="info-box-icon" style="background-color : white; color: #0063C3">
                         <i class="fa fa-exclamation-triangle"></i>
                     </span>
                     <div class="info-box-content" >
@@ -102,14 +105,15 @@ main {
             </div>
             </div>
         </div>
-        <div class="white-box">
+        <div class="white-box" >
+          <h3 class="box-title">SLA Adherence</h3>
         <div class="row">
         <div class="col-md-5" id="inc_pie">
-            <h3 class="box-title">Incidents SLA Adherence</h3>
+            <h3 class="box-title">Incidents</h3>
             <div id="chart1"></div>
         </div>
         <div class="col-md-5" id="sr_pie">
-            <h3 class="box-title">Service Requests SLA Adherence</h3>
+            <h3 class="box-title">Service Requests</h3>
             <div id="chart2"></div>
         </div>
         

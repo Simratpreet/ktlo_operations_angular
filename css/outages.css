@@ -74,4 +74,9 @@ h5
 	padding-bottom: 4px;
 }
 
+.fc td.fc-today
+{
+	background: #e6f2ff!important;
+}
+
 
