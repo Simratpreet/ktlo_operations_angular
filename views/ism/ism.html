@@ -65,7 +65,7 @@ main {
                         <i class="fa fa-edit"></i>
                     </span>
                     <div class="info-box-content" >
-                        <span class="info-box-text">Incidents</span>
+                        <span class="info-box-text" >Incidents</span>
                         <span class="info-box-number"  ng-bind="inc" id="incCount"></span>
                     </div>
                 </div>
@@ -81,17 +81,7 @@ main {
                     </div>
                 </div>
             </div>
-            <div class="col-md-3 col-sm-6 col-xs-12" style="cursor: pointer" id="crTable"> 
-                <div class="info-box">
-                    <span class="info-box-icon" style="background-color : white; color: #0063C3">
-                        <i class="fa fa-edit"></i>
-                    </span>
-                    <div class="info-box-content">
-                        <span class="info-box-text">Change Requests</span>
-                        <span class="info-box-number" ng-bind="cr" id="crCount"></span>
-                    </div>
-                </div>
-            </div>
+            
             <div class="col-md-3 col-sm-6 col-xs-12" style="cursor: pointer" id="slaTable"> 
                 <div class="info-box">
                     <span class="info-box-icon" style="background-color : white; color: #0063C3">
@@ -100,6 +90,17 @@ main {
                     <div class="info-box-content" >
                         <span class="info-box-text">SLA Breaches</span>
                         <span class="info-box-number"  ng-bind="total_sla_breaches" id="slaCount"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-6 col-xs-12" > 
+                <div class="info-box" style="background-color: #d9d9d9">
+                    <span class="info-box-icon" style="background-color : #d9d9d9; color: #0063C3">
+                        <i class="fa fa-edit"></i>
+                    </span>
+                    <div class="info-box-content">
+                        <span class="info-box-text">Change Requests</span>
+                        <span class="info-box-number" ng-bind="cr" id="crCount"></span>
                     </div>
                 </div>
             </div>
@@ -122,7 +123,7 @@ main {
     </div>
     <div class="white-box">
         <div  >
-            <h3 class="box-title">Request Details</h3>
+            <h3 class="box-title">Ticket Details</h3>
             <div tableview="tableviewOptions" tableview-theme="'material'" ng-if="global"></div>
         </div>
     </div>

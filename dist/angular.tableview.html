@@ -1,4 +1,4 @@
-<script type="text/ng-template" id="tableview.head.cell">
+<script type="text/ng-template" id="tableview.head.cell" >
   <span>{{$column.title}}</span>
   <span ng-if="$column.sortable && $column.field" class="sort"></span>
   <input ng-if="$column.filterable && $column.field"
@@ -67,7 +67,7 @@
 
 <div class="holder" ng-class="{'scroller': !!tableview.scrollable}" ng-style="tableview.scrollable">
   <table>
-    <thead>
+    <thead class="fix-header">
       <tr>
         <th ng-if="tableview.selectableBy"
             class="selectable"

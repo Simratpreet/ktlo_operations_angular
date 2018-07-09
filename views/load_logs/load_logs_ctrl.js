@@ -67,14 +67,8 @@ app.controller('load_logs_ctrl', function($scope, $http) {
 
                 var request = {
                     limit: 10,
-                    page: 1,
-                    order: [
-                        { field: "id", sorting: "ASC" },
-                        //{field:"name", sorting:"DESC"},
-                    ],
-                    like: {
-                        "name": "",
-                    }
+                    page: 1
+                    
                 };
 
                 $scope.tableviewOptions = {
@@ -92,7 +86,7 @@ app.controller('load_logs_ctrl', function($scope, $http) {
                             field: "id", // used as identifier for sorting or filtering. creates CSS class "column-{{field}}"
                             name: "id", // creates CSS class "column-{{name}}"
                             title: "Date", // column title
-                            placeholder: "Filter by Date", // placeholder for filter input
+                            placeholder: "[ Filter by Date ]", // placeholder for filter input
                             sortable: true,
                             filterable: true
 
@@ -102,7 +96,7 @@ app.controller('load_logs_ctrl', function($scope, $http) {
                             title: "Status",
                             sortable: true,
                             filterable: true,
-                            placeholder: "Filter by Status"
+                            placeholder: "[ Filter by Status ]"
                         },
                         { field: "sdate", title: "Start Time", sortable: true},
                         { field: "edate", title: "End Time", sortable: true },

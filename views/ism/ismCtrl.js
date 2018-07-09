@@ -107,13 +107,13 @@ app.controller('ismCtrl', function($scope, $http) {
                 data: {
                     // iris data from R
                     columns: [
-                        ['INC SLA MET', $scope.inc_sla_yes],
-                        ['INC SLA NOT MET', $scope.inc_sla_no]
+                        ['SLA Met', $scope.inc_sla_yes],
+                        ['SLA Breached', $scope.inc_sla_no]
                     ],
                     type : 'pie',
                     colors : {
-                        'INC SLA MET' : '#0063C3',
-                        'INC SLA NOT MET' : '#FF7F0E'
+                        'SLA Met' : '#0063C3',
+                        'SLA Breached' : '#FF7F0E'
                     },
                     
                     onclick: function (d, i) { console.log("onclick", d, i); },
@@ -127,13 +127,13 @@ app.controller('ismCtrl', function($scope, $http) {
                 data: {
                     // iris data from R
                     columns: [
-                        ['SR SLA MET', $scope.sr_sla_yes],
-                        ['SR SLA NOT MET', $scope.sr_sla_no]
+                        ['SLA Met', $scope.sr_sla_yes],
+                        ['SLA Breached', $scope.sr_sla_no]
                     ],
                     type : 'pie',
                     colors : {
-                        'SR SLA MET' : '#0063C3',
-                        'SR SLA NOT MET' : '#FF7F0E'
+                        'SLA Met' : '#0063C3',
+                        'SLA Breached' : '#FF7F0E'
                     },
                     onclick: function (d, i) { console.log("onclick", d, i); },
                     onmouseover: function (d, i) { console.log("onmouseover", d, i); },
@@ -174,23 +174,24 @@ app.controller('ismCtrl', function($scope, $http) {
                     field: "id", // used as identifier for sorting or filtering. creates CSS class "column-{{field}}"
                     name: "id", // creates CSS class "column-{{name}}"
                     title: "Number", // column title
-                    placeholder: "Filter by Number", // placeholder for filter input
+                    placeholder: "[ Filter by Number ]", // placeholder for filter input
                     sortable:true,
                     filterable:true
                 },
-                {field:"type", title:"Type", filterable: true, placeholder: "Filter by Type"},
-                  {
+                {field:"type", title:"Type", filterable: true, placeholder: "[ Filter by Type ]",sortable: true },
+                {
                     field:"name",
-                    title:"Short Description"
-                                        
-                  },
+                    title:"Short Description",
+                    filterable: true, placeholder: "[ Filter by Description ]"
+                                       
+                },                 
                   
-                  {field:"priority", title:"Priority", sortable:true},
-                  {field:"state", title:"State", sortable:true},
+                  {field:"state", title:"State", filterable: true, placeholder: "[ Filter by Type ]", sortable:true},
+                  {field:"priority", title:"Priority",  sortable:true},
                   {field:"opened", title:"Opened", sortable:true},
-                  {field:"due_date", title:"Due Date", sortable:true},
+                  {field:"due_date", title:"Due", sortable:true},
                   {field:"closed", title:"Closed", sortable:true},
-                  {field:"sla", title:"SLA Adherence"}
+                  {field:"sla", title:"SLA Adherence", sortable:true}
                 ],
                 provider: dataProvider,
                 request: request,
@@ -229,9 +230,9 @@ app.controller('ismCtrl', function($scope, $http) {
                     ism_db.push({
                         "id": number,
                         "type": type,
-                        "name": sd,
-                        "priority": priority,
+                        "name": sd,                        
                         "state": state,
+                        "priority": priority,
                         "opened": opened,
                         "due_date": due_date,
                         "closed": closed, 
@@ -309,6 +310,20 @@ app.controller('ismCtrl', function($scope, $http) {
                   });
                 }
                 
+                if (request.like.name) {
+                  data = data.filter(function(o){
+                    return o.name && o.name.toLowerCase().indexOf(request.like.name.toLowerCase()) > -1;
+                  });
+                }
+
+                
+
+
+                if (request.like.state) {
+                  data = data.filter(function(o){
+                    return o.state && o.state.toLowerCase().indexOf(request.like.state.toLowerCase()) > -1;
+                  });
+                }
                 var amount = data.length;
                 var limit = request.limit > 0 ? request.limit : 10;
                 var page = request.page > 0 &&  request.page*limit-limit <= amount ? request.page : 1;
