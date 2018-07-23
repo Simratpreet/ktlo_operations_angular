@@ -28,11 +28,10 @@
 .demo {
 	position: relative; 
 	width: 100px;
-	
 	}
 
 .demo i {
-	position: absolute; 
+	position: relative; 
 	bottom: 14px; 
 	right: 24px; 
 	top: auto; c

@@ -9,6 +9,9 @@ app.controller('load_logs_ctrl', function($scope, $http) {
 
 
             var get_data = {};
+            var post_data = {};
+            post_data.input_val1 = "Chirag";
+            post_data.input_val2 = "Dhawan";
             get_data.start_date = $scope.start_date;
             get_data.end_date = $scope.end_date;
 
@@ -43,9 +46,11 @@ app.controller('load_logs_ctrl', function($scope, $http) {
                 console.log("Inside onload function...");
                 console.log("get_data : " + JSON.stringify(get_data));
                 $http({
-                    method: 'GET',
-                    url: 'http://10.204.43.206:5012/loadtracker',
-                    params: get_data
+                    method: 'POST',
+                    //url: 'http://10.204.43.206:5012/loadtracker',
+                    url : 'http://10.204.43.206:5009/test_api',
+                    //params: get_data
+                    data : post_data
                 }).then(function successCallback(responsejson) {
                     $scope.data_json = responsejson.data.load_logs_data;
                     $scope.tabledata = responsejson.data.detail_data;
