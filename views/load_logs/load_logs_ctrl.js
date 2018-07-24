@@ -53,7 +53,8 @@ app.controller('load_logs_ctrl', function($scope, $http) {
 
                     c3chart();
                     detaildata();
-                    
+
+                    $scope.example1model = []; $scope.example1data = [ {id: 1, label: "David"}, {id: 2, label: "Jhon"}, {id: 3, label: "Danny"} ];
 
                 }, function errorCallback(responseValue) {
                     console.log("error");

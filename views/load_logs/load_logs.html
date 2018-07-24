@@ -30,6 +30,12 @@ stroke: : transparent;
 main {
     margin: 15px 0 70px;
 }
+
+#drop1{
+    height: 30px;
+    width: 150px;
+    background: blue;
+}
 </style>
 <main>
     <div class="container-fluid">
@@ -55,6 +61,16 @@ main {
         <div class="white-box">
             <h3 class="box-title">Run Time Details</h3>
             <div tableview="tableviewOptions" tableview-theme="'material'" ng-if="global"></div>
+            <div ng-dropdown-multiselect="" id="drop1" options="example1data" selected-model="example1model"></div>
+            {{example1data}}
         </div>
     </div>
+    <!-- <h1> Dropdown 1</h1>
+    <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-3">
+                    <div id="drop1" ng-dropdown-multiselect="" options="example1data" selected-model="example1model"></div>
+                </div>
+            </div>
+    </div> -->
 </main>

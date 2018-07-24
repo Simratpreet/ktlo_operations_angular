@@ -1,4 +1,4 @@
-var app = angular.module('ktloApp', ["ui.router", "tableview", "ui.calendar"]);
+var app = angular.module('ktloApp', ["ui.router", "tableview", "ui.calendar", "angularjs-dropdown-multiselect"]);
 
 
 app.config(function($stateProvider, $urlRouterProvider) {
